@@ -20,6 +20,7 @@
 		3C3E1C8D1B66D04C00D3AF45 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */; };
 		3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C8F1B66D12500D3AF45 /* PostCell.m */; };
 		3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C921B66DBC900D3AF45 /* MockData.m */; };
+		3C3E1C961B66EBAC00D3AF45 /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		3C3E1C8F1B66D12500D3AF45 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		3C3E1C911B66DBC900D3AF45 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
 		3C3E1C921B66DBC900D3AF45 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
+		3C3E1C941B66EBAC00D3AF45 /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
+		3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				3C3E1C5A1B66CBE900D3AF45 /* AppDelegate.h */,
+				3C3E1C941B66EBAC00D3AF45 /* CoreDataStack.h */,
+				3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */,
 				3C3E1C5B1B66CBE900D3AF45 /* AppDelegate.m */,
 				3C3E1C7C1B66CC0400D3AF45 /* Post.h */,
 				3C3E1C7D1B66CC0400D3AF45 /* Post.m */,
@@ -254,6 +259,7 @@
 				3C3E1C8A1B66CF0000D3AF45 /* ThreadCell.m in Sources */,
 				3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */,
 				3C3E1C871B66CCFE00D3AF45 /* ThreadCollectionView.m in Sources */,
+				3C3E1C961B66EBAC00D3AF45 /* CoreDataStack.m in Sources */,
 				3C3E1C5C1B66CBE900D3AF45 /* AppDelegate.m in Sources */,
 				3C3E1C591B66CBE900D3AF45 /* main.m in Sources */,
 				3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */,
