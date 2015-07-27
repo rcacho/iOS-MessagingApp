@@ -10,4 +10,14 @@
 
 @implementation Post
 
+- (instancetype)initWithUserID:(NSString *)userID andContent:(NSString *)content {
+    self = [super init];
+    if (self) {
+        _user_id = userID;
+        _content = content;
+        _timePosted = [NSDate date];
+    }
+    return self;
+}
+
 @end

@@ -16,5 +16,8 @@
 
 @property NSDate *timePosted;
 
+
+- (instancetype)initWithUserID:(NSString *)userID andContent:(NSString *)content;
+
 @end
 

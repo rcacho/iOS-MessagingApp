@@ -8,6 +8,21 @@
 
 #import "PostCell.h"
 
+@interface PostCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *postContentLabel;
+
+@end
+
 @implementation PostCell
+
+- (void)setPostForCell:(Post *)postForCell {
+    _postForCell = postForCell;
+    [self setContent];
+}
+
+- (void)setContent {
+    self.postContentLabel.text = self.postForCell.content;
+}
 
 @end

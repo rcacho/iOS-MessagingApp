@@ -9,6 +9,21 @@
 
 #import "ThreadCell.h"
 
+@interface ThreadCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
+
+@end
+
 @implementation ThreadCell
+
+- (void)setThreadForCell:(MessageThread *)threadForCell {
+    _threadForCell = threadForCell;
+    [self setContent];
+}
+
+- (void)setContent {
+    self.topicLabel.text = self.threadForCell.topic;
+}
 
 @end

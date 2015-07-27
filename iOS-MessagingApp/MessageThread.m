@@ -10,4 +10,13 @@
 
 @implementation MessageThread
 
+- (instancetype)initWithTopic:(NSString *)topic {
+    self = [super init];
+    if (self) {
+        _topic = topic;
+        _posts = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
 @end

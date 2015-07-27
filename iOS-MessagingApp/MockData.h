@@ -1,5 +1,5 @@
 //
-//  MessageThread.h
+//  MockData.h
 //  iOS-MessagingApp
 //
 //  Created by ricardo antonio cacho on 2015-07-27.
@@ -8,12 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MessageThread : NSObject
+@interface MockData : NSObject
 
-@property NSString *topic;
-
-@property NSMutableArray *posts;
-
-- (instancetype)initWithTopic:(NSString *)topic;
++ (NSDictionary *)getMockData;
 
 @end

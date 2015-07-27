@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageThread.h"
 
 @interface ThreadCell : UICollectionViewCell
+
+@property (nonatomic) MessageThread *threadForCell;
 
 @end

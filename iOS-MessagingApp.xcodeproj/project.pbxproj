@@ -19,6 +19,7 @@
 		3C3E1C8A1B66CF0000D3AF45 /* ThreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C891B66CF0000D3AF45 /* ThreadCell.m */; };
 		3C3E1C8D1B66D04C00D3AF45 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */; };
 		3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C8F1B66D12500D3AF45 /* PostCell.m */; };
+		3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C921B66DBC900D3AF45 /* MockData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 		3C3E1C8E1B66D12500D3AF45 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		3C3E1C8F1B66D12500D3AF45 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		3C3E1C911B66DBC900D3AF45 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
+		3C3E1C921B66DBC900D3AF45 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 				3C3E1C891B66CF0000D3AF45 /* ThreadCell.m */,
 				3C3E1C851B66CCFE00D3AF45 /* ThreadCollectionView.h */,
 				3C3E1C861B66CCFE00D3AF45 /* ThreadCollectionView.m */,
+				3C3E1C911B66DBC900D3AF45 /* MockData.h */,
+				3C3E1C921B66DBC900D3AF45 /* MockData.m */,
 				3C3E1C601B66CBE900D3AF45 /* Main.storyboard */,
 				3C3E1C631B66CBE900D3AF45 /* Images.xcassets */,
 				3C3E1C651B66CBE900D3AF45 /* LaunchScreen.xib */,
@@ -251,6 +256,7 @@
 				3C3E1C871B66CCFE00D3AF45 /* ThreadCollectionView.m in Sources */,
 				3C3E1C5C1B66CBE900D3AF45 /* AppDelegate.m in Sources */,
 				3C3E1C591B66CBE900D3AF45 /* main.m in Sources */,
+				3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */,
 				3C3E1C7E1B66CC0400D3AF45 /* Post.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

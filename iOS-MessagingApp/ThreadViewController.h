@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageThread.h"
 
 @interface ThreadViewController : UIViewController
+
+@property (nonatomic) MessageThread *thread;
 
 @end
