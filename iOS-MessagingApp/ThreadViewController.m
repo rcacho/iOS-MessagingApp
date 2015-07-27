@@ -10,9 +10,13 @@
 #import "Post.h"
 #import "PostCell.h"
 
-@interface ThreadViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface ThreadViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property UITextField *activeTextField;
 
 @property NSMutableDictionary *posts;
 
@@ -26,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self registerForKeyboardNotifications];
     
     self.topicLabel.text = self.thread.topic;
     
@@ -56,24 +61,64 @@
 #pragma mark - TextField Delegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationTransition:UIViewAnimationTransitionNone forView:textField cache:YES];
-    textField.frame = CGRectMake(10, 50, 300, 200);
-    [UIView commitAnimations];
-    
-    NSLog(@"Started editing target!");
+    self.activeTextField = textField;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.userNewPostContent = textField.text;
      [self createNewpost];
     [self.tableView reloadData];
+    
+    self.activeTextField = nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     return [textField resignFirstResponder];
 }
+
+#pragma mark - ScrollView Delegate
+
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, self.activeTextField.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:self.activeTextField.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+
+#pragma mark - Create New Post
 
 - (void)createNewpost {
     // create new post add it to self
