@@ -57,31 +57,6 @@
     [collection addPostMessage:secondPost];
     [collection addPostMessage:thirdPost];
     
-    
-    [secondPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-    
-    [thirdPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-    
-    [firstThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-    
     return collection;
 }
 
@@ -109,34 +84,6 @@
     [collection addPostMessage:firstPost];
     [collection addPostMessage:secondPost];
     [collection addPostMessage:thirdPost];
-    
-    
-    
-    [firstPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-    
-    
-    [secondPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-    
-    [thirdPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"success");
-        } else {
-            NSLog(@"failure");
-        }
-    }];
-
     
     [firstThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

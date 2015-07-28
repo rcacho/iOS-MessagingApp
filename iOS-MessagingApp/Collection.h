@@ -20,4 +20,8 @@
 
 - (void)addPostMessage:(Post *)post;
 
+- (NSInteger)numberOfItemsInSection;
+
+- (Post *)itemAtIndexPath:(NSIndexPath *)indexPath;
+
 @end

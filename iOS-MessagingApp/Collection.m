@@ -19,9 +19,33 @@
     return self;
 }
 
+#pragma mark - Parse Methods
+
 - (void)addPostMessage:(Post *)post {
     [self.posts addObject:post];
     [post setObject:self.thread forKey:@"createdBy"];
+    [self save:post];
 }
+
+- (void)save:(Post *)aPost {
+    [aPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+}
+
+#pragma mark - Collection Methods
+
+- (NSInteger)numberOfItemsInSection {
+    return self.posts.count;
+}
+
+- (Post *)itemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.posts[indexPath.row];
+}
+
 
 @end

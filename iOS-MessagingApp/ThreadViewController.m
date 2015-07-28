@@ -49,12 +49,12 @@
 #pragma mark - TableView Delegates
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.posts.allValues[section] count];
+    return [self.thread numberOfItemsInSection];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *aPostCell = [self.tableView dequeueReusableCellWithIdentifier:@"postCell"];
-    aPostCell.postForCell = self.posts.allValues[indexPath.section][indexPath.row];
+    aPostCell.postForCell = [self.thread itemAtIndexPath:indexPath];
     return aPostCell;
 }
 
@@ -126,10 +126,10 @@
     
     // don't yet have anything to take the user-ID from...
     Post *postToBeAdded = [[Post alloc] init];
+    postToBeAdded.user_id = @"1";
+    postToBeAdded.content = self.userNewPostContent;
     
-    [self.posts.allValues[0] addObject:postToBeAdded];
-    
-    
+    [self.thread addPostMessage:postToBeAdded];
 }
 
 @end
