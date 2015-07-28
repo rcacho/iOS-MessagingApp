@@ -23,7 +23,7 @@
 #pragma mark - Parse Methods
 
 - (void)fetchThreadPosts {
-    PFQuery *query = [PFQuery queryWithClassName:@"MessageThread"];
+    PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query whereKey:@"createdBy" equalTo:self.thread];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
