@@ -9,6 +9,7 @@
 #import "MockData.h"
 #import "MessageThread.h"
 #import "Post.h"
+#import "Collection.h"
 
 @implementation MockData
 
@@ -17,30 +18,134 @@
     return data;
 }
 
-+ (MessageThread *)firstThread {
-    MessageThread *firstThread = [[MessageThread alloc] initWithTopic:@"Need Players For BasetBall Game"];
-    Post *firstPost = [[Post alloc] initWithUserID:@"0" andContent:@"ok"];
-    Post *secondPost = [[Post alloc] initWithUserID:@"0" andContent:@"sure"];
-    Post *thirdPost = [[Post alloc] initWithUserID:@"0" andContent:@"be there soon"];
++ (Collection *)firstThread {
+    MessageThread *firstThread = [[MessageThread alloc] init];
+    firstThread.topic = @"we need players for a basketball game";
+    Post *firstPost = [[Post alloc] init];
+    firstPost.user_id = @"0";
+    firstPost.content = @"okay";
+    firstPost.timePosted = [NSDate date];
+    
+    Post *secondPost = [[Post alloc] init];
+    secondPost.user_id = @"0";
+    secondPost.content = @"sure";
+    secondPost.timePosted = [NSDate date];
+    
+    Post *thirdPost = [[Post alloc] init];
+    thirdPost.user_id = @"0";
+    thirdPost.content = @"be right there";
+    thirdPost.timePosted = [NSDate date];
     
     [firstThread.posts addObject:firstPost];
     [firstThread.posts addObject:secondPost];
     [firstThread.posts addObject:thirdPost];
     
-    return firstThread;
+    [firstPost setObject:firstThread forKey:@"createdBy"];
+    [secondPost setObject:firstThread forKey:@"createdBy"];
+    [thirdPost setObject:firstThread forKey:@"createdBy"];
+    
+    [firstPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    
+    Collection *collection = [[Collection alloc] initWithThread:firstThread];
+    [collection addPostMessage:firstPost];
+    [collection addPostMessage:secondPost];
+    [collection addPostMessage:thirdPost];
+    
+    
+    [secondPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    
+    [thirdPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    
+    [firstThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    
+    return collection;
 }
 
-+ (MessageThread *)secondThread {
-    MessageThread *firstThread = [[MessageThread alloc] initWithTopic:@"stuck in traffic over here"];
-    Post *firstPost = [[Post alloc] initWithUserID:@"0" andContent:@"ok"];
-    Post *secondPost = [[Post alloc] initWithUserID:@"0" andContent:@"sure"];
-    Post *thirdPost = [[Post alloc] initWithUserID:@"0" andContent:@"be there soon"];
++ (Collection*)secondThread {
     
-    [firstThread.posts addObject:firstPost];
-    [firstThread.posts addObject:secondPost];
-    [firstThread.posts addObject:thirdPost];
+    MessageThread *firstThread = [[MessageThread alloc] init];
+    firstThread.topic = @"Stuck in traffic";
     
-    return firstThread;
+    Post *firstPost = [[Post alloc] init];
+    firstPost.user_id = @"0";
+    firstPost.content = @"okay";
+    firstPost.timePosted = [NSDate date];
+    
+    Post *secondPost = [[Post alloc] init];
+    secondPost.user_id = @"0";
+    secondPost.content = @"sure";
+    secondPost.timePosted = [NSDate date];
+    
+    Post *thirdPost = [[Post alloc] init];
+    thirdPost.user_id = @"0";
+    thirdPost.content = @"be right there";
+    thirdPost.timePosted = [NSDate date];
+    
+    Collection *collection = [[Collection alloc] initWithThread:firstThread];
+    [collection addPostMessage:firstPost];
+    [collection addPostMessage:secondPost];
+    [collection addPostMessage:thirdPost];
+    
+    
+    
+    [firstPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    
+    
+    [secondPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    
+    [thirdPost saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+
+    
+    [firstThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"success");
+        } else {
+            NSLog(@"failure");
+        }
+    }];
+    return collection;
 }
 
 @end

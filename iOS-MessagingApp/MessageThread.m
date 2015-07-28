@@ -7,16 +7,22 @@
 //
 
 #import "MessageThread.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation MessageThread
 
-- (instancetype)initWithTopic:(NSString *)topic {
-    self = [super init];
-    if (self) {
-        _topic = topic;
-        _posts = [[NSMutableArray alloc] init];
-    }
-    return self;
+@dynamic topic;
+
+@dynamic posts;
+
++ (void)load {
+    [self registerSubclass];
 }
+
++ (NSString *)parseClassName {
+    return @"MessageThread";
+}
+
+
 
 @end

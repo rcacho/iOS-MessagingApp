@@ -7,17 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
-@interface Post : NSObject
+
+@interface Post : PFObject <PFSubclassing>
 
 @property NSString *user_id;
 
 @property NSString *content;
 
 @property NSDate *timePosted;
-
-
-- (instancetype)initWithUserID:(NSString *)userID andContent:(NSString *)content;
 
 @end
 

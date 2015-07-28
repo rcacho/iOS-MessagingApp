@@ -1,5 +1,5 @@
 //
-//  MessageThread.h
+//  Collection.h
 //  iOS-MessagingApp
 //
 //  Created by ricardo antonio cacho on 2015-07-27.
@@ -7,12 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
+#import "Post.h"
+#import "MessageThread.h"
 
-@interface MessageThread : PFObject <PFSubclassing>
+@interface Collection : NSObject
 
-@property NSString *topic;
+@property MessageThread *thread;
 
 @property NSMutableArray *posts;
+
+- (instancetype)initWithThread:(MessageThread *)thread;
+
+- (void)addPostMessage:(Post *)post;
 
 @end

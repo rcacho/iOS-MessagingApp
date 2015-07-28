@@ -17,13 +17,13 @@
 
 @implementation ThreadCell
 
-- (void)setThreadForCell:(MessageThread *)threadForCell {
+- (void)setThreadForCell:(Collection *)threadForCell {
     _threadForCell = threadForCell;
     [self setContent];
 }
 
 - (void)setContent {
-    self.topicLabel.text = self.threadForCell.topic;
+    self.topicLabel.text = self.threadForCell.thread.topic;
 }
 
 @end

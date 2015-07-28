@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "MessageThread.h"
+#import "Collection.h"
 
 @interface ThreadViewController : UIViewController
 
-@property (nonatomic) MessageThread *thread;
+@property (nonatomic) Collection *thread;
 
 @end

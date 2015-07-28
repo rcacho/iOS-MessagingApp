@@ -7,17 +7,23 @@
 //
 
 #import "Post.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Post
 
-- (instancetype)initWithUserID:(NSString *)userID andContent:(NSString *)content {
-    self = [super init];
-    if (self) {
-        _user_id = userID;
-        _content = content;
-        _timePosted = [NSDate date];
-    }
-    return self;
+@dynamic user_id;
+
+@dynamic content;
+
+@dynamic timePosted;
+
++ (void)load {
+    [self registerSubclass];
 }
+
++ (NSString *)parseClassName {
+    return @"Post";
+}
+
 
 @end

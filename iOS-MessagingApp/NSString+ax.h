@@ -1,5 +1,5 @@
 //
-//  MessageThread.h
+//  NSString+ax.h
 //  iOS-MessagingApp
 //
 //  Created by ricardo antonio cacho on 2015-07-27.
@@ -7,12 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Parse/Parse.h>
 
-@interface MessageThread : PFObject <PFSubclassing>
-
-@property NSString *topic;
-
-@property NSMutableArray *posts;
+@interface NSString (ax)
 
 @end

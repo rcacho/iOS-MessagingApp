@@ -32,18 +32,18 @@
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
     
-    self.topicLabel.text = self.thread.topic;
+    self.topicLabel.text = self.thread.thread.topic;
     
     self.posts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.thread.posts, @"posts", nil];
 }
 
-- (void)setThread:(MessageThread *)thread {
+- (void)setThread:(Collection *)thread {
     _thread = thread;
     [self setContent];
 }
 
 - (void)setContent {
-    self.topicLabel.text = self.thread.topic;
+    self.topicLabel.text = self.thread.thread.topic;
 }
 
 #pragma mark - TableView Delegates
@@ -125,7 +125,8 @@
     // in the real version we would likely add it to our db as well as send it off
     
     // don't yet have anything to take the user-ID from...
-    Post *postToBeAdded = [[Post alloc] initWithUserID:@"0" andContent:self.userNewPostContent];
+    Post *postToBeAdded = [[Post alloc] init];
+    
     [self.posts.allValues[0] addObject:postToBeAdded];
     
     

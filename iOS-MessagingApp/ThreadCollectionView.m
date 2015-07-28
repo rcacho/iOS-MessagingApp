@@ -7,6 +7,7 @@
 //
 
 #import "ThreadCollectionView.h"
+#import <Parse/Parse.h>
 #import "ThreadViewController.h"
 #import "MessageThread.h"
 #import "ThreadCell.h"

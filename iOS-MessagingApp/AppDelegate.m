@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import "MessageThread.h"
+#import "Post.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [Parse enableLocalDatastore];
+    
+    [Parse setApplicationId:@"o7TI9p6v3tpjY5wSkaNZUCJdu4PJXyF8ZFqjdacj"
+                  clientKey:@"t0Z4ttkmeOKw6Jem1OmQpGDhbeaw9hV1iT99a5qK"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    [self loadClasses];
     return YES;
 }
 
@@ -40,6 +52,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)loadClasses {
+    [MessageThread load];
+    [Post load];
 }
 
 @end
