@@ -14,4 +14,6 @@
 
 @property (nonatomic) Collection *thread;
 
+- (void)reloadData;
+
 @end

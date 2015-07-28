@@ -34,6 +34,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self registerForKeyboardNotifications];
+    self.thread.tableView = self;
+    [self.thread fetchThreadPosts];
     
     self.topicLabel.text = self.thread.thread.topic;
     
@@ -63,6 +65,10 @@
     PostCell *aPostCell = [self.tableView dequeueReusableCellWithIdentifier:@"postCell"];
     aPostCell.postForCell = [self.thread itemAtIndexPath:indexPath];
     return aPostCell;
+}
+
+- (void)reloadData {
+    [self.tableView reloadData];
 }
 
 #pragma mark - TextField Delegate

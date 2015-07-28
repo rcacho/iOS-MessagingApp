@@ -7,6 +7,7 @@
 //
 
 #import "Collection.h"
+#import "ThreadViewController.h"
 
 @implementation Collection
 
@@ -20,6 +21,27 @@
 }
 
 #pragma mark - Parse Methods
+
+- (void)fetchThreadPosts {
+    PFQuery *query = [PFQuery queryWithClassName:@"MessageThread"];
+    [query whereKey:@"createdBy" equalTo:self.thread];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            NSLog(@"Recieved Data Successfully");
+            [self preparePosts:(NSArray *)objects];
+            [self.tableView reloadData];
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+}
+
+- (void)preparePosts:(NSArray *)posts {
+    for (Post *post in posts) {
+        [self.posts addObject:post];
+    }
+}
 
 - (void)addPostMessage:(Post *)post {
     [self.posts addObject:post];

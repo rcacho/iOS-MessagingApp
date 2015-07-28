@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class ThreadViewController;
 #import "Post.h"
 #import "MessageThread.h"
 
@@ -16,9 +17,13 @@
 
 @property NSMutableArray *posts;
 
+@property ThreadViewController *tableView;
+
 - (instancetype)initWithThread:(MessageThread *)thread;
 
 - (void)addPostMessage:(Post *)post;
+
+- (void)fetchThreadPosts;
 
 - (NSInteger)numberOfItemsInSection;
 
