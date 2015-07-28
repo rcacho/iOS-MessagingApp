@@ -16,6 +16,9 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UIView *headerBubbleView;
+
+
 @property UITextField *activeTextField;
 
 @property NSMutableDictionary *posts;
@@ -35,6 +38,10 @@
     self.topicLabel.text = self.thread.thread.topic;
     
     self.posts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.thread.posts, @"posts", nil];
+    
+    self.headerBubbleView.layer.cornerRadius = self.headerBubbleView.frame.size.height /2;
+    self.headerBubbleView.layer.masksToBounds = YES;
+    self.headerBubbleView.layer.borderWidth = 0.1;
 }
 
 - (void)setThread:(Collection *)thread {

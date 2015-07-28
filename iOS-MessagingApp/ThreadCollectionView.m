@@ -12,14 +12,15 @@
 #import "MessageThread.h"
 #import "ThreadCell.h"
 #import "MockData.h"
+#import "CollectionHandler.h"
 
 @interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-@property NSDictionary *threads;
+@property CollectionHandler *collection;
 
-@property MessageThread *selectedThread;
+@property Collection *selectedThread;
 
 @end
 
@@ -32,7 +33,9 @@
     // upon clicking a cell go to a threadview
     // threadview is loaded up with topic statement at top
     // message going down (note that we will probably want to order (use date?))
-    self.threads = [MockData getMockData];
+    self.collection = [[CollectionHandler alloc] init];
+    self.collection.collectionView = self;
+    [self.collection fetchThreads];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -42,20 +45,24 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.threads.allValues[section] count];
+    return [self.collection numberOfItemsInSection];
 }
 
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ThreadCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
-    aThreadCell.threadForCell = self.threads.allValues[indexPath.section][indexPath.row];
+    aThreadCell.threadForCell = [self.collection itemAtIndexPath:indexPath];
     return aThreadCell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedThread = self.threads.allValues[indexPath.section][indexPath.row];
+    self.selectedThread = [self.collection itemAtIndexPath:indexPath];
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
+}
+
+- (void)reloadData {
+    [self.collectionView reloadData];
 }
 
 @end

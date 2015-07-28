@@ -10,4 +10,7 @@
 
 @interface ThreadCollectionView : UIViewController
 
+// this probably should be left up to some delegate rather than this strategy
+- (void)reloadData;
+
 @end
