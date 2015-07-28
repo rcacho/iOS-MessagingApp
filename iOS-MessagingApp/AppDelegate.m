@@ -11,7 +11,7 @@
 #import "MessageThread.h"
 #import "Post.h"
 
-@interface AppDelegate ()
+@interface AppDelegate () <CLLocationManagerDelegate>
 
 @end
 
@@ -48,6 +48,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+     [self startLocationManager];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -58,5 +59,56 @@
     [MessageThread load];
     [Post load];
 }
+#pragma mark - Location Manager Methods
+-(void)setUpLocationManager {
+    if (!_locationManager) {
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+        _locationManager.distanceFilter = 10;
+        //have to move 100m before location manager checks again
+        
+        _locationManager.delegate = self;
+        [_locationManager requestWhenInUseAuthorization];
+        
+    }
+    
+    [_locationManager startUpdatingLocation];
+    NSLog(@"Start Regular Location Manager");
+}
 
+- (void)startLocationManager{
+    if ([CLLocationManager locationServicesEnabled]) {
+        
+        if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
+            [self setUpLocationManager];
+            
+        }else if (!([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)){
+            [self setUpLocationManager];
+            
+        }else{
+            UIAlertView *alertView =[[UIAlertView alloc] initWithTitle:@"Location services are disabled, Please go into Settings > Privacy > Location to enable them for Play"
+                                                               message:nil
+                                                              delegate:self
+                                                     cancelButtonTitle:nil
+                                                     otherButtonTitles:@"Ok", nil];
+            [alertView show];
+            
+        }
+    }
+}
+
+-(void)stopLocationManager{
+    if ([CLLocationManager locationServicesEnabled]) {
+        if (_locationManager) {
+            [_locationManager stopUpdatingLocation];
+            NSLog(@"Stop Regular Location Manager");
+        }
+    }
+}
+
+-(void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation * loc = [locations objectAtIndex: [locations count] - 1];
+    _currentLocation = loc;
+    
+}
 @end

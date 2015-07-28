@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4go-4C-DCo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4go-4C-DCo">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NyF-pW-qQT">
-                                <rect key="frame" x="16" y="-1" width="568" height="601"/>
+                                <rect key="frame" x="16" y="-1" width="568" height="431"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="plH-he-F9w">
                                     <size key="itemSize" width="336" height="180"/>
@@ -88,18 +88,53 @@
                                     <outlet property="delegate" destination="rwz-2S-6TJ" id="X8H-Wl-y5d"/>
                                 </connections>
                             </collectionView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Bj-v0-et4">
+                                <rect key="frame" x="7" y="469" width="577" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="rwz-2S-6TJ" id="he9-Qh-sXa"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0jY-GT-Jef">
+                                <rect key="frame" x="7" y="524" width="577" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="rwz-2S-6TJ" id="pum-mL-QCz"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ye-5l-u5d">
+                                <rect key="frame" x="272" y="438" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="createGroup:" destination="rwz-2S-6TJ" eventType="touchUpInside" id="jWi-e9-hSv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="NyF-pW-qQT" secondAttribute="bottom" id="21S-6n-cd3"/>
+                            <constraint firstItem="4Bj-v0-et4" firstAttribute="trailing" secondItem="S9x-9F-ueH" secondAttribute="trailingMargin" id="1QO-UU-az3"/>
+                            <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="NyF-pW-qQT" secondAttribute="bottom" constant="170" id="21S-6n-cd3"/>
+                            <constraint firstItem="0jY-GT-Jef" firstAttribute="top" secondItem="4Bj-v0-et4" secondAttribute="bottom" constant="25" id="CUh-XB-wFE"/>
+                            <constraint firstAttribute="centerX" secondItem="8Ye-5l-u5d" secondAttribute="centerX" constant="5" id="MvR-iA-juJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NyF-pW-qQT" secondAttribute="trailing" id="RAI-K3-1m3"/>
+                            <constraint firstItem="0jY-GT-Jef" firstAttribute="trailing" secondItem="S9x-9F-ueH" secondAttribute="trailingMargin" id="RZo-4y-4m1"/>
                             <constraint firstItem="NyF-pW-qQT" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" id="TBo-cV-qtD"/>
                             <constraint firstItem="NyF-pW-qQT" firstAttribute="top" secondItem="ydh-Vl-PXa" secondAttribute="bottom" constant="-65" id="cPF-l1-qeO"/>
+                            <constraint firstItem="0jY-GT-Jef" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" constant="-9" id="jNx-9q-UeT"/>
+                            <constraint firstItem="4Bj-v0-et4" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" constant="-9" id="mzb-b9-D2g"/>
+                            <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="8Ye-5l-u5d" secondAttribute="bottom" constant="132" id="rNS-N4-vHs"/>
+                            <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="0jY-GT-Jef" secondAttribute="bottom" constant="46" id="w6o-bS-H0V"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="udS-EM-iT8"/>
                     <connections>
                         <outlet property="collectionView" destination="NyF-pW-qQT" id="3RJ-10-eU1"/>
+                        <outlet property="groupRadiusTextField" destination="0jY-GT-Jef" id="DkE-2O-dQB"/>
+                        <outlet property="groupTopicTextField" destination="4Bj-v0-et4" id="GgO-8c-fBV"/>
                         <segue destination="pvO-xo-Poq" kind="show" identifier="showThread" id="fPq-S2-DkL"/>
                     </connections>
                 </viewController>

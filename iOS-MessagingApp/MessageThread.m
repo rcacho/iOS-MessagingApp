@@ -12,6 +12,8 @@
 @implementation MessageThread
 
 @dynamic topic;
+@dynamic radius;
+@dynamic latAndLng;
 
 @dynamic posts;
 

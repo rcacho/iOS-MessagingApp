@@ -12,6 +12,8 @@
 @interface MessageThread : PFObject <PFSubclassing>
 
 @property NSString *topic;
+@property PFGeoPoint * latAndLng;
+@property NSNumber * radius;
 
 @property NSMutableArray *posts;
 

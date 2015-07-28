@@ -13,10 +13,15 @@
 #import "ThreadCell.h"
 #import "MockData.h"
 #import "CollectionHandler.h"
+#import "AppDelegate.h"
 
-@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (nonatomic,strong) CLLocation * currentLocation;
+@property (weak, nonatomic) IBOutlet UITextField *groupTopicTextField;
+@property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
+
 
 @property CollectionHandler *collection;
 
@@ -28,6 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    self.currentLocation = [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.coordinate.latitude longitude:appDelegate.currentLocation.coordinate.longitude];
     // load up mock data
     // cells should be clickable
     // upon clicking a cell go to a threadview
@@ -60,9 +67,29 @@
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    return [textField resignFirstResponder];
+}
 
 - (void)reloadData {
     [self.collectionView reloadData];
+}
+- (IBAction)createGroup:(id)sender {
+    MessageThread * newThread = [[MessageThread alloc]init];
+    newThread.topic = self.groupTopicTextField.text;
+    float groupRadius = [self.groupTopicTextField.text floatValue];
+    NSNumber * radius = [NSNumber numberWithFloat:groupRadius];
+    newThread.radius =radius;
+    PFGeoPoint * pointForGroup = [PFGeoPoint geoPointWithLocation:self.currentLocation];
+    newThread.latAndLng = pointForGroup;
+    [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            // The object has been saved.
+        } else {
+            // There was a problem, check error.description
+        }
+    }];
 }
 
 @end
