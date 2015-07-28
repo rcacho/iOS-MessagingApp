@@ -64,6 +64,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *aPostCell = [self.tableView dequeueReusableCellWithIdentifier:@"postCell"];
     aPostCell.postForCell = [self.thread itemAtIndexPath:indexPath];
+    Post * post = [self.thread itemAtIndexPath:indexPath];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PFUser * user = post[@"user"];
+        PFFile *userFile = user[@"profilePic"];
+        NSData *userPicData = [userFile getData];
+        UIImage * image = [UIImage imageWithData:userPicData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            aPostCell.imageView.image = image;
+            [self.tableView reloadData];
+        });
+        
+    });
+   
+    
+    
     return aPostCell;
 }
 
@@ -141,6 +156,7 @@
     Post *postToBeAdded = [[Post alloc] init];
     postToBeAdded.user_id = @"1";
     postToBeAdded.content = self.userNewPostContent;
+    [postToBeAdded setObject:[PFUser currentUser] forKey:@"user"];
     
     [self.thread addPostMessage:postToBeAdded];
 }

@@ -48,6 +48,8 @@
 		81CFD0111B68126E00FE3B59 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFF81B68126E00FE3B59 /* FBSDKShareKit.framework */; };
 		81CFD0161B6814F700FE3B59 /* Collection.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0131B6814F700FE3B59 /* Collection.m */; };
 		81CFD0171B6814F700FE3B59 /* CollectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0151B6814F700FE3B59 /* CollectionHandler.m */; };
+		81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */; };
+		81CFD01D1B68291900FE3B59 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD01C1B68291900FE3B59 /* FacebookViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,10 @@
 		81CFD0131B6814F700FE3B59 /* Collection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collection.m; sourceTree = "<group>"; };
 		81CFD0141B6814F700FE3B59 /* CollectionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionHandler.h; sourceTree = "<group>"; };
 		81CFD0151B6814F700FE3B59 /* CollectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionHandler.m; sourceTree = "<group>"; };
+		81CFD0181B681CA000FE3B59 /* MaoViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaoViewViewController.h; sourceTree = "<group>"; };
+		81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaoViewViewController.m; sourceTree = "<group>"; };
+		81CFD01B1B68291900FE3B59 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookViewController.h; sourceTree = "<group>"; };
+		81CFD01C1B68291900FE3B59 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,9 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81CFD00D1B68126E00FE3B59 /* MapKit.framework in Frameworks */,
 				81CFCFFC1B68126E00FE3B59 /* Bolts.framework in Frameworks */,
 				81CFD0031B68126E00FE3B59 /* libz.dylib in Frameworks */,
-				81CFD00D1B68126E00FE3B59 /* MapKit.framework in Frameworks */,
 				81CFD00F1B68126E00FE3B59 /* FBSDKCoreKit.framework in Frameworks */,
 				81CFCFFE1B68126E00FE3B59 /* ParseCrashReporting.framework in Frameworks */,
 				81CFD0101B68126E00FE3B59 /* FBSDKLoginKit.framework in Frameworks */,
@@ -185,6 +191,8 @@
 			children = (
 				3C3E1C5A1B66CBE900D3AF45 /* AppDelegate.h */,
 				3C3E1C5B1B66CBE900D3AF45 /* AppDelegate.m */,
+				81CFD01B1B68291900FE3B59 /* FacebookViewController.h */,
+				81CFD01C1B68291900FE3B59 /* FacebookViewController.m */,
 				3C3E1C941B66EBAC00D3AF45 /* CoreDataStack.h */,
 				3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */,
 				81CFD0121B6814F700FE3B59 /* Collection.h */,
@@ -193,6 +201,8 @@
 				81CFD0151B6814F700FE3B59 /* CollectionHandler.m */,
 				3C3E1C7C1B66CC0400D3AF45 /* Post.h */,
 				3C3E1C7D1B66CC0400D3AF45 /* Post.m */,
+				81CFD0181B681CA000FE3B59 /* MaoViewViewController.h */,
+				81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */,
 				3C3E1C7F1B66CC1000D3AF45 /* MessageThread.h */,
 				3C3E1C801B66CC1000D3AF45 /* MessageThread.m */,
 				3C3E1C8E1B66D12500D3AF45 /* PostCell.h */,
@@ -320,6 +330,7 @@
 				TargetAttributes = {
 					3C3E1C521B66CBE900D3AF45 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = G2QCS3699J;
 					};
 					3C3E1C6B1B66CBEA00D3AF45 = {
 						CreatedOnToolsVersion = 6.4;
@@ -374,6 +385,7 @@
 			files = (
 				3C3E1C8D1B66D04C00D3AF45 /* ThreadViewController.m in Sources */,
 				3C3E1C811B66CC1000D3AF45 /* MessageThread.m in Sources */,
+				81CFD01D1B68291900FE3B59 /* FacebookViewController.m in Sources */,
 				3C3E1C8A1B66CF0000D3AF45 /* ThreadCell.m in Sources */,
 				3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */,
 				3C3E1C871B66CCFE00D3AF45 /* ThreadCollectionView.m in Sources */,
@@ -384,6 +396,7 @@
 				3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */,
 				3C3E1C7E1B66CC0400D3AF45 /* Post.m in Sources */,
 				81CFD0161B6814F700FE3B59 /* Collection.m in Sources */,
+				81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +522,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/gig_r/Documents/FacebookSDK,
@@ -517,6 +532,7 @@
 				INFOPLIST_FILE = "iOS-MessagingApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -524,6 +540,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/gig_r/Documents/FacebookSDK,
@@ -532,6 +550,7 @@
 				INFOPLIST_FILE = "iOS-MessagingApp/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

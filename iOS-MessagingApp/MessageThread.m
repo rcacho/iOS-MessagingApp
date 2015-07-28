@@ -14,7 +14,8 @@
 @dynamic topic;
 @dynamic radius;
 @dynamic latAndLng;
-
+@dynamic lat;
+@dynamic lng;
 @dynamic posts;
 
 + (void)load {

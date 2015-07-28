@@ -76,11 +76,16 @@
     [self.collectionView reloadData];
 }
 - (IBAction)createGroup:(id)sender {
+    NSNumber * lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
+     NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
+    
     MessageThread * newThread = [[MessageThread alloc]init];
     newThread.topic = self.groupTopicTextField.text;
     float groupRadius = [self.groupTopicTextField.text floatValue];
     NSNumber * radius = [NSNumber numberWithFloat:groupRadius];
     newThread.radius =radius;
+    newThread.lat = lat;
+    newThread.lng = lng;
     PFGeoPoint * pointForGroup = [PFGeoPoint geoPointWithLocation:self.currentLocation];
     newThread.latAndLng = pointForGroup;
     [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

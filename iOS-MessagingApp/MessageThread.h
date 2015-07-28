@@ -14,6 +14,8 @@
 @property NSString *topic;
 @property PFGeoPoint * latAndLng;
 @property NSNumber * radius;
+@property NSNumber * lat;
+@property NSNumber * lng;
 
 @property NSMutableArray *posts;
 

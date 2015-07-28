@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import "MessageThread.h"
 #import "Post.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface AppDelegate () <CLLocationManagerDelegate>
 
@@ -24,12 +26,14 @@
     
     [Parse setApplicationId:@"o7TI9p6v3tpjY5wSkaNZUCJdu4PJXyF8ZFqjdacj"
                   clientKey:@"t0Z4ttkmeOKw6Jem1OmQpGDhbeaw9hV1iT99a5qK"];
+    [FBSDKSettings setAppID:@"1606922372900913"];
     
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     [self loadClasses];
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -48,12 +52,23 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSDKAppEvents activateApp];
      [self startLocationManager];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
+
 
 - (void)loadClasses {
     [MessageThread load];
@@ -106,9 +121,9 @@
     }
 }
 
--(void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    CLLocation * loc = [locations objectAtIndex: [locations count] - 1];
-    _currentLocation = loc;
-    
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *currentLocation = [locations objectAtIndex:0];
+    self.currentLocation = currentLocation;
 }
 @end
