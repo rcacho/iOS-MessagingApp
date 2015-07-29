@@ -10,4 +10,6 @@
 
 @interface TestMapControlller : UIViewController
 
+- (void)reloadData;
+
 @end

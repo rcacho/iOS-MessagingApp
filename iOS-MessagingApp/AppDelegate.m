@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "MessageThread.h"
 #import "Post.h"
+#import "LocationManagerHandler.h"
 
 @interface AppDelegate ()
 
@@ -48,6 +49,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    LocationManagerHandler *theLocationHandler = [LocationManagerHandler defaultLocationManagerHandler];
+    [theLocationHandler setUpLocationManager];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

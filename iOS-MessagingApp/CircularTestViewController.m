@@ -20,7 +20,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 
-
 @property Collection *selectedCollection;
 
 @end
