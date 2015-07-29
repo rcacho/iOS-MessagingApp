@@ -24,8 +24,9 @@
 
 - (void)fetchThreadPosts {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query includeKey:@"user"];
     [query whereKey:@"createdBy" equalTo:self.thread];
-  [query orderByDescending:@"createdAt"];
+    [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             NSLog(@"Recieved Data Successfully");
@@ -48,6 +49,7 @@
     [self.posts addObject:post];
     [post setObject:self.thread forKey:@"createdBy"];
     [self save:post];
+    
 }
 
 - (void)save:(Post *)aPost {

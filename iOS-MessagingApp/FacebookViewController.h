@@ -12,11 +12,11 @@
 #import <Parse/Parse.h>
 
 @interface FacebookViewController : UIViewController
-@property (strong, nonatomic) IBOutlet FBSDKLoginButton *loginButton;
-@property (weak, nonatomic) IBOutlet FBSDKProfilePictureView *fbPhoto;
-@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @end

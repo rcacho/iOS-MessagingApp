@@ -11,9 +11,9 @@
 #import "ThreadViewController.h"
 #import "MessageThread.h"
 #import "ThreadCell.h"
-#import "MockData.h"
 #import "CollectionHandler.h"
 #import "AppDelegate.h"
+#import "circleCell.h"
 
 @interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 
@@ -43,6 +43,9 @@
     self.collection = [[CollectionHandler alloc] init];
     self.collection.collectionView = self;
     [self.collection fetchThreads];
+    [self.navigationItem setHidesBackButton:YES];
+    
+
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -57,8 +60,7 @@
 
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ThreadCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
-    aThreadCell.threadForCell = [self.collection itemAtIndexPath:indexPath];
+    circleCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
     return aThreadCell;
 }
 
@@ -92,9 +94,13 @@
     newThread.latAndLng = pointForGroup;
     [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alertView show];
+                [self reloadData];
+            });
+            } else {
             // There was a problem, check error.description
         }
     }];
