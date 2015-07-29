@@ -26,13 +26,16 @@
     
     if ([FBSDKAccessToken currentAccessToken] && [PFUser currentUser]) {
         NSLog(@"%@ is logged in",[PFUser currentUser]);
-       // [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
+        [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
         
     }
     
-    else {
+    else if (![FBSDKAccessToken currentAccessToken] && ![PFUser currentUser]) {
+        
+        
+       
+        
         self.loginButton = [[FBSDKLoginButton alloc] init];
-        self.loginButton.delegate = self;
         self.loginButton.delegate = self;
         self.loginButton.center = self.view.center;
         [self.view addSubview:self.loginButton];
@@ -85,22 +88,27 @@
         
         
     }
-    
+    else {
+        [self performSegueWithIdentifier:@"loginSegue" sender:self];
+    }
 }
+
+
 - (IBAction)login:(id)sender {
     if([self checkTextField:self.usernameTextField] ==1 && [self checkTextField:self.passwordTextField] ==1 && [self checkTextField:self.emailTextField] ==1)
     {
-    PFUser * currentUser = [PFUser user];
+    PFUser * newUser = [PFUser user];
     PFFile *imageFile = [PFFile fileWithName:@"image.png" data:self.dataForPicture];
-    [currentUser setObject:imageFile forKey:@"profilePic"];
-    currentUser.username = self.usernameTextField.text;
-    currentUser.password = self.passwordTextField.text;
-    currentUser.email = self.emailTextField.text;
-     [currentUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    [newUser setObject:imageFile forKey:@"profilePic"];
+    newUser.username = self.usernameTextField.text;
+    newUser.password = self.passwordTextField.text;
+    newUser.email = self.emailTextField.text;
+     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
       {
           if(succeeded)
           {
               NSLog(@"saved");
+               [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
           }
           else {
               NSLog(@"error");
@@ -116,9 +124,9 @@
 }
 -(void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error
 {
-    [self.tabBarController setSelectedIndex:1];
     [loginButton setHidden:YES];
-    NSLog(@"here is a message");
+    UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"You are logged in with facebook!" message:@"Now please fill out account details below" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+   
 }
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {

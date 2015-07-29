@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerBubbleView;
 
 
-@property UITextField *activeTextField;
+@property UITextField  *activeTextField;
 
 @property NSMutableDictionary *posts;
 
@@ -66,6 +66,7 @@
     PostCell *aPostCell = [self.tableView dequeueReusableCellWithIdentifier:@"postCell"];
     aPostCell.postForCell = [self.thread itemAtIndexPath:indexPath];
     Post * post = [self.thread itemAtIndexPath:indexPath];
+    if(post[@"user"] != nil)
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         PFUser * user = post[@"user"];
         PFFile *userFile = user[@"profilePic"];
@@ -78,6 +79,7 @@
             [self.tableView reloadData];
         });
        }
+    
         
     });
    
@@ -163,7 +165,9 @@
     Post *postToBeAdded = [[Post alloc] init];
     postToBeAdded.user_id = @"1";
     postToBeAdded.content = self.userNewPostContent;
+        postToBeAdded.timePosted = [NSDate date];
     [postToBeAdded setObject:[PFUser currentUser] forKey:@"user"];
+    
     
     [self.thread addPostMessage:postToBeAdded];
     }

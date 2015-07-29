@@ -50,6 +50,7 @@
 		81CFD0171B6814F700FE3B59 /* CollectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0151B6814F700FE3B59 /* CollectionHandler.m */; };
 		81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */; };
 		81CFD01D1B68291900FE3B59 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD01C1B68291900FE3B59 /* FacebookViewController.m */; };
+		81CFD0201B687DEB00FE3B59 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD01F1B687DEB00FE3B59 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,8 @@
 		81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaoViewViewController.m; sourceTree = "<group>"; };
 		81CFD01B1B68291900FE3B59 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookViewController.h; sourceTree = "<group>"; };
 		81CFD01C1B68291900FE3B59 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookViewController.m; sourceTree = "<group>"; };
+		81CFD01E1B687DEB00FE3B59 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		81CFD01F1B687DEB00FE3B59 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +208,8 @@
 				81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */,
 				3C3E1C7F1B66CC1000D3AF45 /* MessageThread.h */,
 				3C3E1C801B66CC1000D3AF45 /* MessageThread.m */,
+				81CFD01E1B687DEB00FE3B59 /* LoginViewController.h */,
+				81CFD01F1B687DEB00FE3B59 /* LoginViewController.m */,
 				3C3E1C8E1B66D12500D3AF45 /* PostCell.h */,
 				3C3E1C8F1B66D12500D3AF45 /* PostCell.m */,
 				3C3E1C8B1B66D04B00D3AF45 /* ThreadViewController.h */,
@@ -397,6 +402,7 @@
 				3C3E1C7E1B66CC0400D3AF45 /* Post.m in Sources */,
 				81CFD0161B6814F700FE3B59 /* Collection.m in Sources */,
 				81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */,
+				81CFD0201B687DEB00FE3B59 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

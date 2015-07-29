@@ -92,7 +92,8 @@
     newThread.latAndLng = pointForGroup;
     [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            // The object has been saved.
+            UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
         } else {
             // There was a problem, check error.description
         }

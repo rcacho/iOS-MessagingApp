@@ -11,6 +11,8 @@
 @interface PostCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *postContentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *posterLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
@@ -22,7 +24,16 @@
 }
 
 - (void)setContent {
+    NSString *dateString = [NSDateFormatter localizedStringFromDate:self.postForCell.timePosted
+                                                          dateStyle:NSDateFormatterShortStyle
+                                                          timeStyle:NSDateFormatterShortStyle];
+    
+    
+    self.timeLabel.text = dateString;
     self.postContentLabel.text = self.postForCell.content;
+    PFUser * user = self.postForCell[@"user"];
+    NSString * username = user.username;
+    self.posterLabel.text = username;
 }
 
 @end
