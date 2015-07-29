@@ -29,12 +29,13 @@
                                                           dateStyle:NSDateFormatterShortStyle
                                                           timeStyle:NSDateFormatterShortStyle];
     
-    
     self.timeLabel.text = dateString;
     self.postContentLabel.text = self.postForCell.content;
-    PFUser * user = self.postForCell[@"user"];
+    Post * post = self.postForCell;
+    PFUser * user = [self.postForCell objectForKey:@"user"];
+    NSLog(@"Here is %@",user.username);
     self.posterLabel.text = user.username;
-    if(user[@"profilePic"] != nil)
+   if(user[@"profilePic"] != nil)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             PFFile *userFile = user[@"profilePic"];
             NSData *userPicData = [userFile getData];
@@ -45,7 +46,10 @@
                     self.profilePictureImageView.image = image;
                 });
             }
-            
+            else {
+                self.profilePictureImageView.image = [UIImage imageNamed:@"profile-photo1"];
+            }
+    
             
         });
     

@@ -399,10 +399,10 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jtx-VW-ICx">
-                                                            <rect key="frame" x="24" y="17" width="96" height="50"/>
+                                                            <rect key="frame" x="40" y="24" width="50" height="39"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="96" id="V5w-Rw-XcD"/>
-                                                                <constraint firstAttribute="height" constant="50" id="tFJ-I4-9MK"/>
+                                                                <constraint firstAttribute="width" constant="50" id="V5w-Rw-XcD"/>
+                                                                <constraint firstAttribute="height" constant="39" id="tFJ-I4-9MK"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOe-U6-WDX">
@@ -417,13 +417,13 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="axv-GX-9b7" firstAttribute="leading" secondItem="Jtx-VW-ICx" secondAttribute="trailing" constant="46" id="464-qK-8Nu"/>
-                                                        <constraint firstItem="sOe-U6-WDX" firstAttribute="leading" secondItem="Jtx-VW-ICx" secondAttribute="trailing" constant="46" id="4Nt-ef-5Jy"/>
-                                                        <constraint firstItem="MzY-A6-3w3" firstAttribute="leading" secondItem="Jtx-VW-ICx" secondAttribute="trailing" constant="39" id="6tC-FY-PZo"/>
+                                                        <constraint firstItem="axv-GX-9b7" firstAttribute="leading" secondItem="Jtx-VW-ICx" secondAttribute="trailing" constant="76" id="464-qK-8Nu"/>
+                                                        <constraint firstItem="sOe-U6-WDX" firstAttribute="leading" secondItem="Jtx-VW-ICx" secondAttribute="trailing" constant="76" id="4Nt-ef-5Jy"/>
+                                                        <constraint firstItem="MzY-A6-3w3" firstAttribute="leading" secondItem="Jtx-VW-ICx" secondAttribute="trailing" constant="69" id="6tC-FY-PZo"/>
                                                         <constraint firstItem="MzY-A6-3w3" firstAttribute="top" secondItem="DE8-qr-7Bl" secondAttribute="topMargin" constant="9" id="ESe-E5-9Za"/>
                                                         <constraint firstItem="axv-GX-9b7" firstAttribute="top" secondItem="MzY-A6-3w3" secondAttribute="bottom" constant="3" id="FC5-2v-fOu"/>
-                                                        <constraint firstItem="Jtx-VW-ICx" firstAttribute="top" secondItem="DE8-qr-7Bl" secondAttribute="topMargin" constant="9" id="UhP-J2-fz2"/>
-                                                        <constraint firstItem="Jtx-VW-ICx" firstAttribute="leading" secondItem="DE8-qr-7Bl" secondAttribute="leadingMargin" constant="16" id="ZIM-3i-lhj"/>
+                                                        <constraint firstItem="Jtx-VW-ICx" firstAttribute="top" secondItem="DE8-qr-7Bl" secondAttribute="topMargin" constant="16" id="UhP-J2-fz2"/>
+                                                        <constraint firstItem="Jtx-VW-ICx" firstAttribute="leading" secondItem="DE8-qr-7Bl" secondAttribute="leadingMargin" constant="32" id="ZIM-3i-lhj"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="sOe-U6-WDX" secondAttribute="bottom" constant="10" id="cce-hW-dgp"/>
                                                     </constraints>
                                                 </tableViewCellContentView>

@@ -149,7 +149,7 @@
     Post *postToBeAdded = [[Post alloc] init];
     postToBeAdded.user_id = @"1";
     postToBeAdded.content = self.userNewPostContent;
-        postToBeAdded.timePosted = [NSDate date];
+    postToBeAdded.timePosted = [NSDate date];
     [postToBeAdded setObject:[PFUser currentUser] forKey:@"user"];
     
     [self.thread addPostMessage:postToBeAdded];
