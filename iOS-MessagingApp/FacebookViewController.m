@@ -28,6 +28,7 @@
     if ([FBSDKAccessToken currentAccessToken] && [PFUser currentUser]) {
         NSLog(@"%@ is logged in",[PFUser currentUser]);
         [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
+       
         
         
     }

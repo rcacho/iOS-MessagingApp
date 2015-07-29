@@ -24,6 +24,7 @@
 
 - (void)fetchThreadPosts {
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query includeKey:@"user"];
     [query whereKey:@"createdBy" equalTo:self.thread];
   [query orderByDescending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

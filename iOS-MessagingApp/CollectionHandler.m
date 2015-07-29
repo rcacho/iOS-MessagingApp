@@ -8,10 +8,12 @@
 
 #import "CollectionHandler.h"
 #import <Parse/Parse.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface CollectionHandler ()
 
 @property NSArray *threads;
+@property (nonatomic) CLLocation * currentLocation;
 
 @end
 
@@ -38,6 +40,33 @@
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSString *)radius
+{
+    MessageThread * newThead = [[MessageThread alloc]init];
+    newThead.topic = topic;
+    newThead.lat = lat;
+    newThead.lng = lng;
+    float newRadius = [radius floatValue];
+    NSNumber * radiusNumber = [NSNumber numberWithFloat:newRadius];
+    newThead.radius = radiusNumber;
+    newThead.latAndLng = [PFGeoPoint geoPointWithLocation:self.currentLocation];
+    [self didAddArray];
+    [newThead saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"SUCCEDED");
+        }
+        else {
+            NSLog(@"Fail saving");
+        }
+        
+    }];
+    
+}
+-(void)didAddArray {
+    [self fetchThreads];
+    [self.collections removeAllObjects];
+    [self prepareCollections];
 }
 
 - (void)prepareCollections {
