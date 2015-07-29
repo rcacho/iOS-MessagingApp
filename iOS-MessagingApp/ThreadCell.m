@@ -24,6 +24,7 @@
 
 - (void)setContent {
     self.topicLabel.text = self.threadForCell.thread.topic;
+    
 }
 
 @end
