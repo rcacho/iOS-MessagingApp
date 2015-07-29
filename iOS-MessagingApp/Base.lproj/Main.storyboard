@@ -169,8 +169,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VvL-89-eNA">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VvL-89-eNA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
                                     <outlet property="delegate" destination="blm-wR-aRk" id="JgH-PF-2yh"/>
                                 </connections>
@@ -405,6 +405,9 @@
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jtx-VW-ICx">
+                                                            <rect key="frame" x="24" y="17" width="96" height="50"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="axv-GX-9b7" firstAttribute="top" secondItem="MzY-A6-3w3" secondAttribute="bottom" constant="10" id="1wO-P2-cMX"/>
@@ -412,7 +415,6 @@
                                                         <constraint firstItem="axv-GX-9b7" firstAttribute="top" secondItem="DE8-qr-7Bl" secondAttribute="topMargin" id="3yV-mm-GOj"/>
                                                         <constraint firstItem="MzY-A6-3w3" firstAttribute="centerX" secondItem="axv-GX-9b7" secondAttribute="centerX" constant="7" id="7r4-Xi-dbc"/>
                                                         <constraint firstItem="axv-GX-9b7" firstAttribute="leading" secondItem="DE8-qr-7Bl" secondAttribute="leadingMargin" constant="262" id="UK5-2B-RIj"/>
-                                                        <constraint firstItem="sOe-U6-WDX" firstAttribute="leading" secondItem="axv-GX-9b7" secondAttribute="leading" id="bYu-fC-idI"/>
                                                         <constraint firstItem="sOe-U6-WDX" firstAttribute="leading" secondItem="MzY-A6-3w3" secondAttribute="leading" id="ef5-IQ-ubV"/>
                                                         <constraint firstItem="axv-GX-9b7" firstAttribute="top" secondItem="DE8-qr-7Bl" secondAttribute="topMargin" constant="30" id="fxI-gn-BDA"/>
                                                         <constraint firstAttribute="centerY" secondItem="MzY-A6-3w3" secondAttribute="centerY" constant="28.5" id="fyz-8v-Dsa"/>
@@ -442,6 +444,7 @@
                                                 <connections>
                                                     <outlet property="postContentLabel" destination="MzY-A6-3w3" id="PaM-v9-3ib"/>
                                                     <outlet property="posterLabel" destination="sOe-U6-WDX" id="NOX-e0-AsQ"/>
+                                                    <outlet property="profilePictureImageView" destination="Jtx-VW-ICx" id="KiC-rW-cYW"/>
                                                     <outlet property="timeLabel" destination="axv-GX-9b7" id="dWr-kA-6J2"/>
                                                 </connections>
                                             </tableViewCell>

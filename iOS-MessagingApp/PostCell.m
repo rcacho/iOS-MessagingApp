@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *postContentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *posterLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 
 @end
 
@@ -32,8 +33,22 @@
     self.timeLabel.text = dateString;
     self.postContentLabel.text = self.postForCell.content;
     PFUser * user = self.postForCell[@"user"];
-    NSString * username = user.username;
-    self.posterLabel.text = username;
+    if(self.postForCell[@"user"] != nil)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            PFFile *userFile = user[@"profilePic"];
+            NSData *userPicData = [userFile getData];
+            UIImage * image = [UIImage imageWithData:userPicData];
+            if(image != nil)
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.profilePictureImageView.image = image;
+                });
+            }
+            
+            
+        });
+    
+
 }
 
 @end
