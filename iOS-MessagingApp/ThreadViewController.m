@@ -82,6 +82,7 @@
      [self createNewpost];
     [self.tableView reloadData];
     
+    self.activeTextField.text = nil;
     self.activeTextField = nil;
 }
 

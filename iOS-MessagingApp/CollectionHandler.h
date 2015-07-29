@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ThreadCollectionView.h"
+#import "CircularTestViewController.h"
 #import "Collection.h"
 #import "MessageThread.h"
 
@@ -15,7 +16,7 @@
 
 @property NSMutableArray *collections;
 
-@property ThreadCollectionView *collectionView;
+@property  CircularTestViewController *collectionView;
 
 - (void)fetchThreads;
 
