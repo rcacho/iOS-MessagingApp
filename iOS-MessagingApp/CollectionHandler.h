@@ -24,4 +24,6 @@
 
 - (Collection *)itemAtIndexPath:(NSIndexPath *)indexPath;
 
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSString *)radius;
+
 @end

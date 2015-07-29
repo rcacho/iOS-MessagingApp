@@ -31,8 +31,11 @@
 
 @implementation ThreadCollectionView
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationItem setHidesBackButton:YES];
+
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     self.currentLocation = [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.coordinate.latitude longitude:appDelegate.currentLocation.coordinate.longitude];
     // load up mock data
@@ -75,37 +78,20 @@
 }
 
 - (void)reloadData {
-    [self.collectionView reloadData];
+   
+         [self.collectionView reloadData];
+   
 }
 - (IBAction)createGroup:(id)sender {
     NSNumber * lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
      NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
+     if([self checkIfEntry:self.groupTopicTextField] != 0 && [self checkIfNumber:self.groupRadiusTextField] != 0 )
+     {
+         [self.collection addNewThread:self.groupTopicTextField.text withLat:lat andLong:lng andRadius:self.groupRadiusTextField.text];
+     }
     
-    MessageThread * newThread = [[MessageThread alloc]init];
-    if([self checkIfEntry:self.groupTopicTextField] != 0 && [self checkIfNumber:self.groupRadiusTextField] != 0 )
-    newThread.topic = self.groupTopicTextField.text;
-    NSString * groupRadiusAsText = self.groupRadiusTextField.text;
-    NSInteger groupRadius = [groupRadiusAsText integerValue];
-    NSNumber * radius = [NSNumber numberWithInteger:groupRadius];
-    newThread.radius =radius;
-    newThread.lat = lat;
-    newThread.lng = lng;
-    PFGeoPoint * pointForGroup = [PFGeoPoint geoPointWithLocation:self.currentLocation];
-    newThread.latAndLng = pointForGroup;
-    [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alertView show];
-                [self reloadData];
-            });
-            } else {
-            // There was a problem, check error.description
-        }
-    }];
 }
--(BOOL)checkIfEntry:(UITextField *)textfield
+    -(BOOL)checkIfEntry:(UITextField *)textfield
 {
     if(textfield.text != nil)
     {
