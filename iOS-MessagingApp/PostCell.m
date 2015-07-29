@@ -33,7 +33,8 @@
     self.timeLabel.text = dateString;
     self.postContentLabel.text = self.postForCell.content;
     PFUser * user = self.postForCell[@"user"];
-    if(self.postForCell[@"user"] != nil)
+    self.posterLabel.text = user.username;
+    if(user[@"profilePic"] != nil)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             PFFile *userFile = user[@"profilePic"];
             NSData *userPicData = [userFile getData];

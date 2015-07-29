@@ -91,9 +91,13 @@
     newThread.latAndLng = pointForGroup;
     [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-            [alertView show];
-        } else {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alertView show];
+                [self reloadData];
+            });
+            } else {
             // There was a problem, check error.description
         }
     }];

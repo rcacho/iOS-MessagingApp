@@ -48,6 +48,7 @@
     [self.posts addObject:post];
     [post setObject:self.thread forKey:@"createdBy"];
     [self save:post];
+    
 }
 
 - (void)save:(Post *)aPost {

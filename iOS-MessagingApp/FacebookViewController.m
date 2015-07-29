@@ -8,12 +8,13 @@
 
 #import "FacebookViewController.h"
 
-
+//WHEN FIRST LOGIN TO facebook
 @interface FacebookViewController () <FBSDKLoginButtonDelegate,UITextFieldDelegate>
 @property (nonatomic,strong) NSString * pictureUrl;
 @property (nonatomic,strong) NSString * name;
 @property (nonatomic,strong) NSString * email;
 @property (nonatomic,strong) NSData * dataForPicture;
+
 
 @end
 
@@ -28,9 +29,10 @@
         NSLog(@"%@ is logged in",[PFUser currentUser]);
         [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
         
+        
     }
     
-    else if (![FBSDKAccessToken currentAccessToken] && ![PFUser currentUser]) {
+    else if ([FBSDKAccessToken currentAccessToken] && ![PFUser currentUser]) {
         
         
        
@@ -85,7 +87,7 @@
             }
             
         }];
-        
+        //put logic here to login
         
     }
     else {

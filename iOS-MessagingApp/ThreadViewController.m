@@ -26,6 +26,7 @@
 @property NSString *userNewPostContent;
 
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
+@property (weak, nonatomic) IBOutlet UILabel *groupRadiusLabel;
 
 @end
 
@@ -39,6 +40,7 @@
     [self.thread fetchThreadPosts];
     
     self.topicLabel.text = self.thread.thread.topic;
+    self.groupRadiusLabel.text = [NSString stringWithFormat:@"Group Radius: %@ meters",self.thread.thread.radius];
     
     self.posts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.thread.posts, @"posts", nil];
     
@@ -150,8 +152,8 @@
         postToBeAdded.timePosted = [NSDate date];
     [postToBeAdded setObject:[PFUser currentUser] forKey:@"user"];
     
-    
     [self.thread addPostMessage:postToBeAdded];
+    self.activeTextField.text = @"";
     }
     else {
         UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please enter a message" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
