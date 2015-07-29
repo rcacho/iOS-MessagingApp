@@ -98,8 +98,8 @@
     if([self checkTextField:self.usernameTextField] ==1 && [self checkTextField:self.passwordTextField] ==1 && [self checkTextField:self.emailTextField] ==1)
     {
     PFUser * newUser = [PFUser user];
-    PFFile *imageFile = [PFFile fileWithName:@"image.png" data:self.dataForPicture];
-    [newUser setObject:imageFile forKey:@"profilePic"];
+//    PFFile *imageFile = [PFFile fileWithName:@"image.png" data:self.dataForPicture];
+//    [newUser setObject:imageFile forKey:@"profilePic"];
     newUser.username = self.usernameTextField.text;
     newUser.password = self.passwordTextField.text;
     newUser.email = self.emailTextField.text;
