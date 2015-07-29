@@ -11,9 +11,9 @@
 #import "ThreadViewController.h"
 #import "MessageThread.h"
 #import "ThreadCell.h"
-#import "MockData.h"
 #import "CollectionHandler.h"
 #import "AppDelegate.h"
+#import "circleCell.h"
 
 @interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 
@@ -57,8 +57,7 @@
 
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ThreadCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
-    aThreadCell.threadForCell = [self.collection itemAtIndexPath:indexPath];
+    circleCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
     return aThreadCell;
 }
 
