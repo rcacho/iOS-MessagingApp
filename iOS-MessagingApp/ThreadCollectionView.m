@@ -13,10 +13,15 @@
 #import "ThreadCell.h"
 #import "MockData.h"
 #import "CollectionHandler.h"
+#import "AppDelegate.h"
 
-@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITextField *groupTopicTextField;
+@property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
+@property (strong,nonatomic) CLLocation * currentLocation;
+
 
 @property CollectionHandler *collection;
 
@@ -28,6 +33,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    self.currentLocation = [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.coordinate.latitude longitude:appDelegate.currentLocation.coordinate.longitude];
     // load up mock data
     // cells should be clickable
     // upon clicking a cell go to a threadview
@@ -60,9 +67,62 @@
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
 }
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    return [textField resignFirstResponder];
+}
 
 - (void)reloadData {
     [self.collectionView reloadData];
 }
-
+- (IBAction)createGroup:(id)sender {
+    NSNumber * lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
+     NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
+    
+    MessageThread * newThread = [[MessageThread alloc]init];
+    if([self checkIfEntry:self.groupTopicTextField] != 0 && [self checkIfNumber:self.groupRadiusTextField] != 0 )
+    newThread.topic = self.groupTopicTextField.text;
+    NSString * groupRadiusAsText = self.groupRadiusTextField.text;
+    NSInteger groupRadius = [groupRadiusAsText integerValue];
+    NSNumber * radius = [NSNumber numberWithInteger:groupRadius];
+    newThread.radius =radius;
+    newThread.lat = lat;
+    newThread.lng = lng;
+    PFGeoPoint * pointForGroup = [PFGeoPoint geoPointWithLocation:self.currentLocation];
+    newThread.latAndLng = pointForGroup;
+    [newThread saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Created New Group" message:[NSString stringWithFormat:@"Created %@",self.groupTopicTextField.text] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        } else {
+            // There was a problem, check error.description
+        }
+    }];
+}
+-(BOOL)checkIfEntry:(UITextField *)textfield
+{
+    if(textfield.text != nil)
+    {
+        return YES;
+    }
+    else {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter text" message:@"Your text is empty" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        return NO;
+    }
+}
+-(BOOL)checkIfNumber:(UITextField *)textfield
+{
+    NSString * txtString = [textfield text];
+    NSInteger radiusInt = [txtString integerValue];
+    if(radiusInt != 0)
+    {
+        return YES;
+    }
+    else {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter a number" message:@"Your did not enter a valid number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        return NO;
+    }
+}
 @end

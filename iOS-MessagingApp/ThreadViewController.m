@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerBubbleView;
 
 
-@property UITextField *activeTextField;
+@property UITextField  *activeTextField;
 
 @property NSMutableDictionary *posts;
 
@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
     [self.thread fetchThreadPosts];
@@ -64,6 +65,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *aPostCell = [self.tableView dequeueReusableCellWithIdentifier:@"postCell"];
     aPostCell.postForCell = [self.thread itemAtIndexPath:indexPath];
+       
+    
     return aPostCell;
 }
 
@@ -132,6 +135,7 @@
 }
 
 
+
 #pragma mark - Create New Post
 
 - (void)createNewpost {
@@ -139,11 +143,21 @@
     // in the real version we would likely add it to our db as well as send it off
     
     // don't yet have anything to take the user-ID from...
+    if(![self.userNewPostContent isEqualToString:@""])
+    {
     Post *postToBeAdded = [[Post alloc] init];
     postToBeAdded.user_id = @"1";
     postToBeAdded.content = self.userNewPostContent;
+        postToBeAdded.timePosted = [NSDate date];
+    [postToBeAdded setObject:[PFUser currentUser] forKey:@"user"];
+    
     
     [self.thread addPostMessage:postToBeAdded];
+    }
+    else {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please enter a message" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 @end
