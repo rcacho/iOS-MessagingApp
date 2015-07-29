@@ -7,6 +7,7 @@
 //
 
 #import "FacebookViewController.h"
+#import "ThreadCollectionView.h"
 
 //WHEN FIRST LOGIN TO facebook
 @interface FacebookViewController () <FBSDKLoginButtonDelegate,UITextFieldDelegate>
@@ -42,7 +43,16 @@
     // check to see if the user is already logged in
     if ([FBSDKAccessToken currentAccessToken] && [PFUser currentUser]) {
         NSLog(@"%@ is logged in",[PFUser currentUser]);
+        [UIView setAnimationsEnabled:NO];
+        self.view.hidden = YES;
+        
         [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView setAnimationsEnabled:NO];
+            self.view.hidden = NO;
+        });
+
     } else if ([FBSDKAccessToken currentAccessToken] && ![PFUser currentUser]) {
         
         [self setUpFacebookLoginButton];
