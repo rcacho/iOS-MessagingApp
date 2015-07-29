@@ -9,26 +9,23 @@
 #import "MaoViewViewController.h"
 #import "MessageThread.h"
 #import "AppDelegate.h"
+#import "MessageThread.h"
+#import "CollectionHandler.h"
+#import "Collection.h"
 
-@interface MaoViewViewController ()
+@interface MaoViewViewController ()  <MKMapViewDelegate>
+
 
 @end
 
 @implementation MaoViewViewController
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        self.arrayOfCloseGroups = [NSMutableArray arrayWithCapacity:15];
-    }
-    return self;
-}
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     self.currentLocation = [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.coordinate.latitude longitude:appDelegate.currentLocation.coordinate.longitude];
-    
+    self.mapView.showsUserLocation = YES;
     
     PFGeoPoint * userGeoPoint = [PFGeoPoint geoPointWithLocation:self.currentLocation];
     PFQuery *query = [PFQuery queryWithClassName:@"MessageThread"];

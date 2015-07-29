@@ -25,7 +25,8 @@
    
     
     if ([FBSDKAccessToken currentAccessToken] && [PFUser currentUser]) {
-        NSLog(@"WE ARE LOGGED in");
+        NSLog(@"%@ is logged in",[PFUser currentUser]);
+       // [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
         
     }
     
@@ -87,14 +88,14 @@
     
 }
 - (IBAction)login:(id)sender {
+    if([self checkTextField:self.usernameTextField] ==1 && [self checkTextField:self.passwordTextField] ==1 && [self checkTextField:self.emailTextField] ==1)
+    {
     PFUser * currentUser = [PFUser user];
-   
     PFFile *imageFile = [PFFile fileWithName:@"image.png" data:self.dataForPicture];
     [currentUser setObject:imageFile forKey:@"profilePic"];
     currentUser.username = self.usernameTextField.text;
     currentUser.password = self.passwordTextField.text;
     currentUser.email = self.emailTextField.text;
-   // [currentUser setObject:self.dataForPicture forKey:@"dataForPicture"];
      [currentUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
       {
           if(succeeded)
@@ -105,6 +106,7 @@
               NSLog(@"error");
           }
       }];
+    }
 }
 
 
@@ -116,6 +118,7 @@
 {
     [self.tabBarController setSelectedIndex:1];
     [loginButton setHidden:YES];
+    NSLog(@"here is a message");
 }
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {
@@ -124,6 +127,16 @@
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     return [textField resignFirstResponder];
+}
+-(BOOL)checkTextField:(UITextField *)textField
+{
+    if([textField.text isEqualToString:@""] )
+    {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"All three fields need text" message:@"Please make sure you fill out all of the fields" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return NO;
+    }
+    return YES;
 }
 
 

@@ -12,8 +12,7 @@
 #import "Post.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
-
-@interface AppDelegate () <CLLocationManagerDelegate>
+@interface AppDelegate () 
 
 @end
 
@@ -22,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+     [self setUpLocationManager];
     [Parse enableLocalDatastore];
     
     [Parse setApplicationId:@"o7TI9p6v3tpjY5wSkaNZUCJdu4PJXyF8ZFqjdacj"
@@ -52,8 +52,9 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+   //  [self startLocationManager];
     [FBSDKAppEvents activateApp];
-     [self startLocationManager];
+   
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -74,7 +75,8 @@
     [MessageThread load];
     [Post load];
 }
-#pragma mark - Location Manager Methods
+
+
 -(void)setUpLocationManager {
     if (!_locationManager) {
         _locationManager = [[CLLocationManager alloc] init];
@@ -83,7 +85,9 @@
         //have to move 100m before location manager checks again
         
         _locationManager.delegate = self;
-        [_locationManager requestWhenInUseAuthorization];
+            [_locationManager requestWhenInUseAuthorization];
+        
+        NSLog(@"new location Manager in startLocationManager");
         
     }
     
@@ -91,8 +95,19 @@
     NSLog(@"Start Regular Location Manager");
 }
 
+
+
+-(void)stopLocationManager{
+    if ([CLLocationManager locationServicesEnabled]) {
+        if (_locationManager) {
+            [_locationManager stopUpdatingLocation];
+            NSLog(@"Stop Regular Location Manager");
+        }
+    }
+}
 - (void)startLocationManager{
     if ([CLLocationManager locationServicesEnabled]) {
+        
         
         if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined){
             [self setUpLocationManager];
@@ -112,18 +127,29 @@
     }
 }
 
--(void)stopLocationManager{
-    if ([CLLocationManager locationServicesEnabled]) {
-        if (_locationManager) {
-            [_locationManager stopUpdatingLocation];
-            NSLog(@"Stop Regular Location Manager");
+
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation * loc = [locations objectAtIndex: [locations count] - 1];
+    
+   
+    
+    NSTimeInterval locationAge = -[loc.timestamp timeIntervalSinceNow];
+    if (locationAge > 10.0){
+        return;
+    }
+    
+    if (loc.horizontalAccuracy < 0){
+
+        return;
+    }
+    
+    if (_currentLocation == nil || _currentLocation.horizontalAccuracy >= loc.horizontalAccuracy){
+        _currentLocation = loc;
+        
+        if (loc.horizontalAccuracy <= _locationManager.desiredAccuracy) {
+            [self stopLocationManager];
         }
     }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    CLLocation *currentLocation = [locations objectAtIndex:0];
-    self.currentLocation = currentLocation;
 }
 @end

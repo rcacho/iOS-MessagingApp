@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "MessageThread.h"
 
-@interface MaoViewViewController : UIViewController <MKMapViewDelegate>
+@interface MaoViewViewController : UIViewController
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong,nonatomic) CLLocation * currentLocation;
-@property (nonatomic,strong) NSMutableArray * arrayOfCloseGroups;
+@property (strong,nonatomic) CLLocationManager *locationManager;
+@property (strong,nonatomic) MessageThread * selectedThread;
 
 @end

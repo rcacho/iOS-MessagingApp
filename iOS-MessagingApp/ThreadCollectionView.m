@@ -18,9 +18,9 @@
 @interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (nonatomic,strong) CLLocation * currentLocation;
 @property (weak, nonatomic) IBOutlet UITextField *groupTopicTextField;
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
+@property (strong,nonatomic) CLLocation * currentLocation;
 
 
 @property CollectionHandler *collection;
@@ -80,9 +80,11 @@
      NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
     
     MessageThread * newThread = [[MessageThread alloc]init];
+    if([self checkIfEntry:self.groupTopicTextField] != 0 && [self checkIfNumber:self.groupRadiusTextField] != 0 )
     newThread.topic = self.groupTopicTextField.text;
-    float groupRadius = [self.groupTopicTextField.text floatValue];
-    NSNumber * radius = [NSNumber numberWithFloat:groupRadius];
+    NSString * groupRadiusAsText = self.groupRadiusTextField.text;
+    NSInteger groupRadius = [groupRadiusAsText integerValue];
+    NSNumber * radius = [NSNumber numberWithInteger:groupRadius];
     newThread.radius =radius;
     newThread.lat = lat;
     newThread.lng = lng;
@@ -96,5 +98,30 @@
         }
     }];
 }
-
+-(BOOL)checkIfEntry:(UITextField *)textfield
+{
+    if(textfield.text != nil)
+    {
+        return YES;
+    }
+    else {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter text" message:@"Your text is empty" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        return NO;
+    }
+}
+-(BOOL)checkIfNumber:(UITextField *)textfield
+{
+    NSString * txtString = [textfield text];
+    NSInteger radiusInt = [txtString integerValue];
+    if(radiusInt != 0)
+    {
+        return YES;
+    }
+    else {
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter a number" message:@"Your did not enter a valid number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alertView show];
+        return NO;
+    }
+}
 @end
