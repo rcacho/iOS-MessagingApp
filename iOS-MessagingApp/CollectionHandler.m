@@ -44,8 +44,7 @@
         }
     }];
 }
--(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius
-{
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius andPost:(NSString *)content {
     MessageThread * newThead = [[MessageThread alloc]init];
     newThead.topic = topic;
     newThead.lat = lat;
@@ -56,7 +55,12 @@
     [newThead saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"SUCCEDED");
-            Collection *thread = [[Collection alloc] initWithThread:newThead];
+            if (content != nil) {
+                Collection *newestCollection = [[Collection alloc] initWithThread:newThead];
+                Post *firstPost = [[Post alloc] init];
+                firstPost.content = content;
+                [newestCollection addPostMessage:firstPost];
+            }
         }
         else {
             NSLog(@"Fail saving");

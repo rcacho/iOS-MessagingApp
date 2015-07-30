@@ -100,7 +100,7 @@
      NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
      if([self checkIfEntry:self.groupTopicTextField] != 0 && [self checkIfNumber:self.groupRadiusTextField] != 0 )
      {
-         [self.collection addNewThread:self.groupTopicTextField.text withLat:lat andLong:lng andRadius:self.groupRadiusTextField.text];
+         [self.collection addNewThread:self.groupTopicTextField.text withLat:lat andLong:lng andRadius:self.groupRadiusTextField.text andPost:nil];
      }
     
 }

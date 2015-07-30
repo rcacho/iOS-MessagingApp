@@ -76,7 +76,7 @@
 #pragma mark - IBActions
 
 - (IBAction)submitNewGroup:(UIButton *)sender {
-    [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong: [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius ]];
+    [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong: [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius ] andPost:self.postTextField.text];
     
     if (self.postTextField.text != nil) {
         
