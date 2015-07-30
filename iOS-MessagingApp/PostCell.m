@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *posterLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UIView *viewForChangingAlpha;
 
 @end
 
@@ -30,6 +31,7 @@
                                                           timeStyle:NSDateFormatterShortStyle];
     
     self.timeLabel.text = dateString;
+    //self.viewForChangingAlpha.alpha = .7;
     self.postContentLabel.text = self.postForCell.content;
     Post * post = self.postForCell;
     PFUser * user = [self.postForCell objectForKey:@"user"];
