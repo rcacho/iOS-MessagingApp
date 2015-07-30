@@ -13,7 +13,10 @@
 @interface CollectionHandler ()
 
 @property NSArray *threads;
+
 @property (nonatomic) CLLocation * currentLocation;
+
+
 
 @end
 
@@ -53,6 +56,7 @@
     [newThead saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"SUCCEDED");
+            Collection *thread = [[Collection alloc] initWithThread:newThead];
         }
         else {
             NSLog(@"Fail saving");

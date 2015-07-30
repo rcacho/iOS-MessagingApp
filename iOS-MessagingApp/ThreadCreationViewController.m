@@ -34,6 +34,8 @@
 }
 
 
+#pragma mark - Map Methods
+
 - (void) initiateMap {
     LocationManagerHandler *theLocationManagerHandler = [LocationManagerHandler defaultLocationManagerHandler];
     
@@ -46,13 +48,17 @@
     MKCoordinateRegion adjustedRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, zoominMapArea, zoominMapArea);
     
     [_mapView setRegion:adjustedRegion animated:YES];
-    
-   // [self addCircle:150];
 
-    
-
-    
 }
+
+-(void)mapViewDidFinishLoadingMap:(nonnull MKMapView *)mapView{
+    
+    [self initiateMap];
+}
+
+
+
+#pragma mark - Circular Overlay
 
 - (void)addCircle:(NSInteger)radius {
     CLLocationCoordinate2D center = {_currentLocation.coordinate.latitude, _currentLocation.coordinate.longitude};
@@ -67,16 +73,14 @@
     return self.areaOfMessage;
 }
 
--(void)mapViewDidFinishLoadingMap:(nonnull MKMapView *)mapView{
-
-        [self initiateMap];
-}
-
-
 #pragma mark - IBActions
 
 - (IBAction)submitNewGroup:(UIButton *)sender {
     [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong: [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius ]];
+    
+    if (self.postTextField.text != nil) {
+        
+    }
     
 }
 
