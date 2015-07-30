@@ -19,8 +19,9 @@
 		3C3E1C8A1B66CF0000D3AF45 /* ThreadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C891B66CF0000D3AF45 /* ThreadCell.m */; };
 		3C3E1C8D1B66D04C00D3AF45 /* ThreadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */; };
 		3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C8F1B66D12500D3AF45 /* PostCell.m */; };
-		3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C921B66DBC900D3AF45 /* MockData.m */; };
-		3C3E1C961B66EBAC00D3AF45 /* CoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */; };
+		81374DC61B698D3B007926AD /* LocationManagerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DC51B698D3B007926AD /* LocationManagerHandler.m */; };
+		81374DC91B698D5B007926AD /* circleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DC81B698D5B007926AD /* circleCell.m */; };
+		81374DCC1B698D6D007926AD /* CircularLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DCB1B698D6D007926AD /* CircularLayout.m */; };
 		81CFCFF91B68126E00FE3B59 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 81CFCFE01B68126E00FE3B59 /* FacebookSDKStrings.bundle */; };
 		81CFCFFA1B68126E00FE3B59 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFE11B68126E00FE3B59 /* FBAudienceNetwork.framework */; };
 		81CFCFFB1B68126E00FE3B59 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFE21B68126E00FE3B59 /* FBSDKMessengerShareKit.framework */; };
@@ -87,10 +88,12 @@
 		3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadViewController.m; sourceTree = "<group>"; };
 		3C3E1C8E1B66D12500D3AF45 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		3C3E1C8F1B66D12500D3AF45 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
-		3C3E1C911B66DBC900D3AF45 /* MockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockData.h; sourceTree = "<group>"; };
-		3C3E1C921B66DBC900D3AF45 /* MockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockData.m; sourceTree = "<group>"; };
-		3C3E1C941B66EBAC00D3AF45 /* CoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
-		3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStack.m; sourceTree = "<group>"; };
+		81374DC41B698D3B007926AD /* LocationManagerHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManagerHandler.h; sourceTree = "<group>"; };
+		81374DC51B698D3B007926AD /* LocationManagerHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManagerHandler.m; sourceTree = "<group>"; };
+		81374DC71B698D5B007926AD /* circleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = circleCell.h; sourceTree = "<group>"; };
+		81374DC81B698D5B007926AD /* circleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = circleCell.m; sourceTree = "<group>"; };
+		81374DCA1B698D6D007926AD /* CircularLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularLayout.h; sourceTree = "<group>"; };
+		81374DCB1B698D6D007926AD /* CircularLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularLayout.m; sourceTree = "<group>"; };
 		81CFCFE01B68126E00FE3B59 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = ../../FacebookSDK/FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		81CFCFE11B68126E00FE3B59 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = ../../FacebookSDK/FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		81CFCFE21B68126E00FE3B59 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
@@ -196,8 +199,10 @@
 				3C3E1C5B1B66CBE900D3AF45 /* AppDelegate.m */,
 				81CFD01B1B68291900FE3B59 /* FacebookViewController.h */,
 				81CFD01C1B68291900FE3B59 /* FacebookViewController.m */,
-				3C3E1C941B66EBAC00D3AF45 /* CoreDataStack.h */,
-				3C3E1C951B66EBAC00D3AF45 /* CoreDataStack.m */,
+				81374DC71B698D5B007926AD /* circleCell.h */,
+				81374DC81B698D5B007926AD /* circleCell.m */,
+				81374DCA1B698D6D007926AD /* CircularLayout.h */,
+				81374DCB1B698D6D007926AD /* CircularLayout.m */,
 				81CFD0121B6814F700FE3B59 /* Collection.h */,
 				81CFD0131B6814F700FE3B59 /* Collection.m */,
 				81CFD0141B6814F700FE3B59 /* CollectionHandler.h */,
@@ -208,6 +213,8 @@
 				81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */,
 				3C3E1C7F1B66CC1000D3AF45 /* MessageThread.h */,
 				3C3E1C801B66CC1000D3AF45 /* MessageThread.m */,
+				81374DC41B698D3B007926AD /* LocationManagerHandler.h */,
+				81374DC51B698D3B007926AD /* LocationManagerHandler.m */,
 				81CFD01E1B687DEB00FE3B59 /* LoginViewController.h */,
 				81CFD01F1B687DEB00FE3B59 /* LoginViewController.m */,
 				3C3E1C8E1B66D12500D3AF45 /* PostCell.h */,
@@ -218,8 +225,6 @@
 				3C3E1C891B66CF0000D3AF45 /* ThreadCell.m */,
 				3C3E1C851B66CCFE00D3AF45 /* ThreadCollectionView.h */,
 				3C3E1C861B66CCFE00D3AF45 /* ThreadCollectionView.m */,
-				3C3E1C911B66DBC900D3AF45 /* MockData.h */,
-				3C3E1C921B66DBC900D3AF45 /* MockData.m */,
 				3C3E1C601B66CBE900D3AF45 /* Main.storyboard */,
 				3C3E1C631B66CBE900D3AF45 /* Images.xcassets */,
 				3C3E1C651B66CBE900D3AF45 /* LaunchScreen.xib */,
@@ -394,14 +399,15 @@
 				3C3E1C8A1B66CF0000D3AF45 /* ThreadCell.m in Sources */,
 				3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */,
 				3C3E1C871B66CCFE00D3AF45 /* ThreadCollectionView.m in Sources */,
-				3C3E1C961B66EBAC00D3AF45 /* CoreDataStack.m in Sources */,
+				81374DC91B698D5B007926AD /* circleCell.m in Sources */,
 				3C3E1C5C1B66CBE900D3AF45 /* AppDelegate.m in Sources */,
+				81374DC61B698D3B007926AD /* LocationManagerHandler.m in Sources */,
 				3C3E1C591B66CBE900D3AF45 /* main.m in Sources */,
 				81CFD0171B6814F700FE3B59 /* CollectionHandler.m in Sources */,
-				3C3E1C931B66DBC900D3AF45 /* MockData.m in Sources */,
 				3C3E1C7E1B66CC0400D3AF45 /* Post.m in Sources */,
 				81CFD0161B6814F700FE3B59 /* Collection.m in Sources */,
 				81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */,
+				81374DCC1B698D6D007926AD /* CircularLayout.m in Sources */,
 				81CFD0201B687DEB00FE3B59 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

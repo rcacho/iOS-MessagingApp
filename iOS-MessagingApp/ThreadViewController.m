@@ -18,8 +18,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headerBubbleView;
 
+@property (weak, nonatomic) IBOutlet UIView *viewToHide;
 
 @property UITextField  *activeTextField;
+
 
 @property NSMutableDictionary *posts;
 
@@ -34,6 +36,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+ //   self.tableView.backgroundColor = [UIColor colorWithRed:.44 green:.50 blue:.56 alpha:1.0];
+   // self.tableView.backgroundColor = [UIColor whiteColor];
     
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
@@ -80,12 +84,15 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.activeTextField = textField;
+   // [self.viewToHide setHidden:YES];
+  [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.userNewPostContent = textField.text;
      [self createNewpost];
     [self.tableView reloadData];
+  //  [self.viewToHide setHidden:NO];
     
     self.activeTextField.text = nil;
     self.activeTextField = nil;
@@ -115,7 +122,7 @@
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height+20, 0.0);
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
     
@@ -131,9 +138,18 @@
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
+   
+  
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGPoint point = CGPointMake(self.activeTextField.bounds.origin.x, self.activeTextField.bounds.origin.y+scrollView.contentOffset.y);
+   
+    self.activeTextField.bounds = CGRectMake(self.activeTextField.bounds.origin.x,point.y, self.activeTextField.bounds.size.width, self.activeTextField.bounds.size.height);
+   NSLog(@"%@ is the textfields bounds", NSStringFromCGRect(self.activeTextField.bounds));
 }
 
 
