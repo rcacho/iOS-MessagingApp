@@ -24,6 +24,7 @@
 @property (strong,nonatomic) NSMutableArray * arrayOfRecentLookedAtPosts;
 @property (weak, nonatomic) IBOutlet UITableView *tableViewForRecentLookedAtPosts;
 
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 
 @property CollectionHandler *collection;
 
@@ -95,6 +96,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedThread = [self.collection itemAtIndexPath:indexPath];
+    
+    self.topicLabel.text = [self.collection itemAtIndexPath:indexPath].thread.topic;
+    
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
 }

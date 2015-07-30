@@ -1,13 +1,13 @@
 //
-//  LoginViewController.h
+//  MessageUIView.h
 //  iOS-MessagingApp
 //
-//  Created by Rich Blanchard on 7/28/15.
+//  Created by ricardo antonio cacho on 2015-07-29.
 //  Copyright (c) 2015 ricardo antonio cacho. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
+@interface MessageUIView : UIView
 
 @end

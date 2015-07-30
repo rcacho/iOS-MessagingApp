@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 - (IBAction)login:(id)sender;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -20,15 +21,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.scrollView setScrollEnabled:YES];
-    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height+500);
-   
-    // Do any additional setup after loading the view.
+       
+    self.scrollView.contentSize = CGSizeMake(600, 2000);
+    self.scrollView.scrollEnabled = NO;
+    [self.navigationItem setHidesBackButton:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    [self registerForKeyboardNotifications];
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [self deregisterFromKeyboardNotifications];
+    
+    [super viewWillDisappear:animated];
+    
 }
 
 
@@ -60,6 +72,69 @@
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+   
+   if(textField == self.passwordTextField)
+   {
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    self.scrollView.scrollEnabled = NO;
+    
+   }
     return [textField resignFirstResponder];
 }
+
+
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    self.scrollView.scrollEnabled =YES;
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, (kbSize.height+50.0), 0.0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your app might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, self.passwordTextField.frame.origin) ) {
+        [self.scrollView scrollRectToVisible:self.passwordTextField.frame animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
+     self.scrollView.scrollEnabled = NO;
+    //[self t]
+    
+}
+- (void)deregisterFromKeyboardNotifications {
+[[NSNotificationCenter defaultCenter] removeObserver:self
+                                                name:UIKeyboardDidHideNotification
+                                              object:nil];
+
+[[NSNotificationCenter defaultCenter] removeObserver:self
+                                                name:UIKeyboardWillHideNotification
+                                              object:nil];
+}
+
+
 @end

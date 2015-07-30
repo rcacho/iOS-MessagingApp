@@ -6,23 +6,25 @@
 //  Copyright (c) 2015 ricardo antonio cacho. All rights reserved.
 //
 
-#import "MaoViewViewController.h"
+#import "MapViewController.h"
 #import "MessageThread.h"
 #import "AppDelegate.h"
 #import "MessageThread.h"
 #import "CollectionHandler.h"
 #import "Collection.h"
 
-@interface MaoViewViewController ()  <MKMapViewDelegate>
+@interface MapViewController ()  <MKMapViewDelegate>
 
 
 @end
 
-@implementation MaoViewViewController
+@implementation MapViewController
 
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    self.mapView.mapType = MKMapTypeHybrid;
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     self.currentLocation = [[CLLocation alloc] initWithLatitude:appDelegate.currentLocation.coordinate.latitude longitude:appDelegate.currentLocation.coordinate.longitude];
     self.mapView.showsUserLocation = YES;

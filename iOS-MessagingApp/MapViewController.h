@@ -11,10 +11,14 @@
 #import <CoreLocation/CoreLocation.h>
 #import "MessageThread.h"
 
-@interface MaoViewViewController : UIViewController
+@interface MapViewController : UIViewController
+
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 @property (strong,nonatomic) CLLocation * currentLocation;
+
 @property (strong,nonatomic) CLLocationManager *locationManager;
+
 @property (strong,nonatomic) MessageThread * selectedThread;
 
 @end
