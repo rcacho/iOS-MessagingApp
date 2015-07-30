@@ -41,15 +41,13 @@
         }
     }];
 }
--(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSString *)radius
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius
 {
     MessageThread * newThead = [[MessageThread alloc]init];
     newThead.topic = topic;
     newThead.lat = lat;
     newThead.lng = lng;
-    float newRadius = [radius floatValue];
-    NSNumber * radiusNumber = [NSNumber numberWithFloat:newRadius];
-    newThead.radius = radiusNumber;
+    newThead.radius = radius;
     newThead.latAndLng = [PFGeoPoint geoPointWithLocation:self.currentLocation];
     [self didAddArray];
     [newThead saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

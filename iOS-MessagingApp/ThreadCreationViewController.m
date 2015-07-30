@@ -11,7 +11,7 @@
 
 #define zoominMapArea 2100
 
-@interface ThreadCreationViewController () <MKMapViewDelegate>
+@interface ThreadCreationViewController () <MKMapViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *topicTextField;
 
@@ -47,7 +47,7 @@
     
     [_mapView setRegion:adjustedRegion animated:YES];
     
-    [self addCircle:150];
+   // [self addCircle:150];
 
     
 
@@ -73,15 +73,30 @@
 }
 
 
+#pragma mark - IBActions
+
 - (IBAction)submitNewGroup:(UIButton *)sender {
+    [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong: [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius ]];
     
 }
-
 
 - (IBAction)expandArea:(UISlider *)sender {
     [self.mapView removeOverlay:self.areaOfMessage.circle];
     [self addCircle:sender.value * 100];
-    
+}
+
+#pragma mark - TextField Delegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField isEqual:self.topicTextField]) {
+        // check?
+    } else if ([textField isEqual:self.postTextField]) {
+        
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    return [textField resignFirstResponder];
 }
 
 

@@ -10,6 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "MessageThread.h"
+#import "CollectionHandler.h"
 
 @interface ThreadCreationViewController : UIViewController
 
@@ -19,6 +20,6 @@
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 
-@property (strong,nonatomic) MessageThread * selectedThread;
+@property (strong,nonatomic) CollectionHandler * collection;
 
 @end

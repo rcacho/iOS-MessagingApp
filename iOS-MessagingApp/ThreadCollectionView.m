@@ -18,8 +18,11 @@
 @interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 @property (weak, nonatomic) IBOutlet UITextField *groupTopicTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
+
 @property (strong,nonatomic) CLLocation * currentLocation;
 
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
@@ -52,23 +55,25 @@
 
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showThread"]) {
         [segue.destinationViewController setThread:self.selectedThread];
+    } else if ([segue.identifier isEqualToString:@"createNewGroup"]) {
+        [segue.destinationViewController setCollection:self.collection];
     }
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.collection numberOfItemsInSection];
 }
 
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     circleCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
     return aThreadCell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedThread = [self.collection itemAtIndexPath:indexPath];
     
     self.topicLabel.text = [self.collection itemAtIndexPath:indexPath].thread.topic;
@@ -76,8 +81,8 @@
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
 }
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     return [textField resignFirstResponder];
 }
 
@@ -86,6 +91,10 @@
          [self.collectionView reloadData];
    
 }
+- (IBAction)goToCreationPage:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"createNewGroup" sender:sender];
+}
+
 - (IBAction)createGroup:(id)sender {
     NSNumber * lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
      NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
@@ -95,8 +104,8 @@
      }
     
 }
-    -(BOOL)checkIfEntry:(UITextField *)textfield
-{
+
+- (BOOL)checkIfEntry:(UITextField *)textfield {
     if(textfield.text != nil)
     {
         return YES;
@@ -107,8 +116,8 @@
         return NO;
     }
 }
--(BOOL)checkIfNumber:(UITextField *)textfield
-{
+
+- (BOOL)checkIfNumber:(UITextField *)textfield {
     NSString * txtString = [textfield text];
     NSInteger radiusInt = [txtString integerValue];
     if(radiusInt != 0)
@@ -121,4 +130,5 @@
         return NO;
     }
 }
+
 @end

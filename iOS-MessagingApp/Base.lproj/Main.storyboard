@@ -85,7 +85,7 @@
                     <navigationItem key="navigationItem" id="udS-EM-iT8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oU1-A8-rPm">
                             <connections>
-                                <segue destination="blm-wR-aRk" kind="show" identifier="createNewGroup" id="R8f-QM-KEn"/>
+                                <action selector="goToCreationPage:" destination="rwz-2S-6TJ" id="dOb-4e-Hsf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -93,6 +93,7 @@
                         <outlet property="collectionView" destination="NyF-pW-qQT" id="3RJ-10-eU1"/>
                         <outlet property="topicLabel" destination="Tg2-35-jXt" id="FB1-EP-b0e"/>
                         <segue destination="pvO-xo-Poq" kind="show" identifier="showThread" id="fPq-S2-DkL"/>
+                        <segue destination="blm-wR-aRk" kind="show" identifier="createNewGroup" id="agw-FF-JCN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PiJ-tl-Y0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -141,11 +142,17 @@
                                                 <rect key="frame" x="10" y="16" width="488" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="blm-wR-aRk" id="9ci-GW-pAw"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Post" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zta-n7-hXC">
                                                 <rect key="frame" x="10" y="58" width="488" height="112"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="blm-wR-aRk" id="Afg-42-rIN"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="0.24180505460000001" blue="0.3054967938" alpha="0.0" colorSpace="calibratedRGB"/>
