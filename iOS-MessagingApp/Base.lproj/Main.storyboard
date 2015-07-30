@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NyF-pW-qQT">
-                                <rect key="frame" x="16" y="-1" width="568" height="369"/>
+                                <rect key="frame" x="384" y="-1" width="200" height="243"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="plH-he-F9w" customClass="CircularLayout">
                                     <size key="itemSize" width="336" height="180"/>
@@ -62,18 +62,44 @@
                                     <constraint firstAttribute="centerY" secondItem="Tg2-35-jXt" secondAttribute="centerY" constant="0.5" id="zES-pT-dNP"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l0d-RQ-kMI" customClass="RoundedUIView">
+                                <rect key="frame" x="0.0" y="82" width="113" height="12"/>
+                                <color key="backgroundColor" red="0.37940096379999999" green="1" blue="0.93073566289999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="SqX-hO-Bup"/>
+                                    <constraint firstAttribute="height" constant="12" id="b1R-hp-C3M"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sz3-kI-LxY" customClass="RoundedUIView">
+                                <rect key="frame" x="0.0" y="104" width="113" height="12"/>
+                                <color key="backgroundColor" red="0.37940096379999999" green="1" blue="0.93073566289999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ci-S0-wUj" customClass="RoundedUIView">
+                                <rect key="frame" x="0.0" y="124" width="113" height="12"/>
+                                <color key="backgroundColor" red="0.37940096379999999" green="1" blue="0.93073566289999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="NyF-pW-qQT" secondAttribute="bottom" constant="200" id="21S-6n-cd3"/>
+                            <constraint firstItem="Sz3-kI-LxY" firstAttribute="height" secondItem="l0d-RQ-kMI" secondAttribute="height" id="CAK-7B-Agd"/>
+                            <constraint firstItem="3ci-S0-wUj" firstAttribute="top" secondItem="Sz3-kI-LxY" secondAttribute="bottom" constant="10" id="F6Z-lm-JTM"/>
                             <constraint firstAttribute="width" secondItem="Xsn-vN-qQn" secondAttribute="width" multiplier="2" constant="1" id="FlE-Jg-Qpe"/>
+                            <constraint firstItem="l0d-RQ-kMI" firstAttribute="height" secondItem="3ci-S0-wUj" secondAttribute="height" id="HLk-rZ-Ljg"/>
+                            <constraint firstItem="Sz3-kI-LxY" firstAttribute="top" secondItem="l0d-RQ-kMI" secondAttribute="bottom" constant="10" id="KEP-Qt-Fuu"/>
                             <constraint firstAttribute="centerY" secondItem="Xsn-vN-qQn" secondAttribute="centerY" constant="-172" id="LZc-5f-T7Z"/>
+                            <constraint firstItem="Sz3-kI-LxY" firstAttribute="width" secondItem="l0d-RQ-kMI" secondAttribute="width" id="R1G-OM-egV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="NyF-pW-qQT" secondAttribute="trailing" id="RAI-K3-1m3"/>
                             <constraint firstItem="NyF-pW-qQT" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" id="TBo-cV-qtD"/>
+                            <constraint firstItem="l0d-RQ-kMI" firstAttribute="width" secondItem="3ci-S0-wUj" secondAttribute="width" id="U8m-Ru-tMq"/>
+                            <constraint firstItem="Sz3-kI-LxY" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" constant="-20" id="Yrh-YL-Xmm"/>
                             <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="Xsn-vN-qQn" secondAttribute="bottom" constant="20" id="b0b-4W-1zo"/>
                             <constraint firstItem="NyF-pW-qQT" firstAttribute="top" secondItem="ydh-Vl-PXa" secondAttribute="bottom" constant="-65" id="cPF-l1-qeO"/>
+                            <constraint firstItem="l0d-RQ-kMI" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" constant="-20" id="eeC-Cl-veN"/>
                             <constraint firstAttribute="centerX" secondItem="Xsn-vN-qQn" secondAttribute="centerX" id="hc9-fv-OfF"/>
                             <constraint firstItem="Xsn-vN-qQn" firstAttribute="top" secondItem="NyF-pW-qQT" secondAttribute="bottom" constant="70" id="m6Z-j8-1TK"/>
+                            <constraint firstItem="3ci-S0-wUj" firstAttribute="leading" secondItem="S9x-9F-ueH" secondAttribute="leadingMargin" constant="-20" id="nKk-S3-FbF"/>
+                            <constraint firstItem="l0d-RQ-kMI" firstAttribute="top" secondItem="ydh-Vl-PXa" secondAttribute="bottom" constant="40" id="zQ6-GF-auv"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
