@@ -36,8 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- //   self.tableView.backgroundColor = [UIColor colorWithRed:.44 green:.50 blue:.56 alpha:1.0];
-   // self.tableView.backgroundColor = [UIColor whiteColor];
+    [self.delegate lookedAtPost:self.thread];
+
+    
     
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
@@ -173,9 +174,10 @@
     self.activeTextField.text = @"";
     }
     else {
-        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please enter a message" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        NSLog(@"blank message");
     }
 }
+
+
 
 @end

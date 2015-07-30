@@ -15,12 +15,14 @@
 #import "AppDelegate.h"
 #import "circleCell.h"
 
-@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate>
+@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,lookedAtPost>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UITextField *groupTopicTextField;
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
 @property (strong,nonatomic) CLLocation * currentLocation;
+@property (strong,nonatomic) NSMutableArray * arrayOfRecentLookedAtPosts;
+@property (weak, nonatomic) IBOutlet UITableView *tableViewForRecentLookedAtPosts;
 
 
 @property CollectionHandler *collection;
@@ -30,10 +32,19 @@
 @end
 
 @implementation ThreadCollectionView
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.arrayOfRecentLookedAtPosts = [NSMutableArray arrayWithCapacity:5];
+    }
+    return self;
+}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableViewForRecentLookedAtPosts.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];
     [self.navigationItem setHidesBackButton:YES];
 
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -54,6 +65,21 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showThread"]) {
         [segue.destinationViewController setThread:self.selectedThread];
+        ThreadViewController * vc = segue.destinationViewController;
+        [vc setDelegate:self];
+    }
+    if([segue.identifier isEqualToString:@"recentShowThread"])
+    {
+        UITableViewCell * selectedCell = (UITableViewCell *)sender;
+        NSIndexPath *clickedPost = [self.tableViewForRecentLookedAtPosts indexPathForCell:selectedCell];
+        Collection * collectionOfTableViewCellHit = self.arrayOfRecentLookedAtPosts[clickedPost.row];
+        [segue.destinationViewController setThread:collectionOfTableViewCellHit];
+        
+       
+        
+      //  [segue.destinationViewController setThread:thread];
+        
+        
     }
 }
 
@@ -82,39 +108,40 @@
          [self.collectionView reloadData];
    
 }
-- (IBAction)createGroup:(id)sender {
-    NSNumber * lat = [NSNumber numberWithFloat:self.currentLocation.coordinate.latitude];
-     NSNumber * lng = [NSNumber numberWithFloat:self.currentLocation.coordinate.longitude];
-     if([self checkIfEntry:self.groupTopicTextField] != 0 && [self checkIfNumber:self.groupRadiusTextField] != 0 )
-     {
-         [self.collection addNewThread:self.groupTopicTextField.text withLat:lat andLong:lng andRadius:self.groupRadiusTextField.text];
-     }
+#pragma mark - TableView for recent posts
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.arrayOfRecentLookedAtPosts.count;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"recentPosts"];
+   Collection * collectionThread = self.arrayOfRecentLookedAtPosts[indexPath.row];
+    cell.textLabel.text = collectionThread.thread.topic;
+   cell.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];
+    return cell;
+}
+#pragma mark - Delegate for looking at a post
+-(void)lookedAtPost:(Collection *)lookedAtThread
+{
+   
+    if(self.arrayOfRecentLookedAtPosts.count == 5)
+    {
+        [self.arrayOfRecentLookedAtPosts removeLastObject];
+        [self.arrayOfRecentLookedAtPosts insertObject:lookedAtThread atIndex:0];
+        [self.tableViewForRecentLookedAtPosts reloadData];
+        
+    }
+    else {
+         [self.arrayOfRecentLookedAtPosts insertObject:lookedAtThread atIndex:0];
+        [self.tableViewForRecentLookedAtPosts reloadData];
+    }
     
 }
-    -(BOOL)checkIfEntry:(UITextField *)textfield
-{
-    if(textfield.text != nil)
-    {
-        return YES;
-    }
-    else {
-        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter text" message:@"Your text is empty" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
-        return NO;
-    }
-}
--(BOOL)checkIfNumber:(UITextField *)textfield
-{
-    NSString * txtString = [textfield text];
-    NSInteger radiusInt = [txtString integerValue];
-    if(radiusInt != 0)
-    {
-        return YES;
-    }
-    else {
-        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please Enter a number" message:@"Your did not enter a valid number" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alertView show];
-        return NO;
-    }
-}
+
+
 @end

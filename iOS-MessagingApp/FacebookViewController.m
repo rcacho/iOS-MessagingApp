@@ -25,6 +25,7 @@
 @property FBSDKProfilePictureView *fbPhoto;
 
 @property UIImageView *profilePictureImageView;
+@property (nonatomic,strong) FBSDKProfile * profile;
 
 
 @end
@@ -34,9 +35,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    [self manageFacebookLogin];
-}
+    [self setUpFacebookLoginButton];
+
+  }
+
 
 
 - (void)manageFacebookLogin {
@@ -45,7 +47,6 @@
         NSLog(@"%@ is logged in",[PFUser currentUser]);
         [UIView setAnimationsEnabled:NO];
         self.view.hidden = YES;
-        [PFUser logOut];
         
         [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -162,9 +163,10 @@
 - (void)getFacebookInformation {
     // this is gettingninformation from facebook??
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"picture",@"fields",nil];
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:params];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
+             NSLog(@"fetched user:%@", result);
             // result is a dictionary with the user's Facebook data
             NSLog(@"result is %@",result);
             NSDictionary *userData = (NSDictionary *)result;

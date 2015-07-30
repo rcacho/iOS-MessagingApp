@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "MessageThread.h"
 #import "Collection.h"
+@protocol lookedAtPost <NSObject>
+-(void)lookedAtPost:(Collection *)lookedAtCollection;
+@end
 
 @interface ThreadViewController : UIViewController
-
 @property (nonatomic) Collection *thread;
+@property id<lookedAtPost> delegate;
 
 - (void)reloadData;
 
