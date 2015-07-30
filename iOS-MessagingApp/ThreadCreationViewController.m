@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UISlider *distanceSlider;
 
+@property MKCircleView *areaOfMessage;
+
 @end
 
 @implementation ThreadCreationViewController
@@ -45,21 +47,24 @@
     
     [_mapView setRegion:adjustedRegion animated:YES];
     
-    
-    CLLocationCoordinate2D center = {_currentLocation.coordinate.latitude, _currentLocation.coordinate.longitude};
-    MKCircle *circle = [MKCircle circleWithCenterCoordinate:center radius:150];
-    [self.mapView addOverlay:circle];
+    [self addCircle:150];
+
     
 
     
 }
 
+- (void)addCircle:(NSInteger)radius {
+    CLLocationCoordinate2D center = {_currentLocation.coordinate.latitude, _currentLocation.coordinate.longitude};
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:center radius:radius];
+    [self.mapView addOverlay:circle];
+}
+
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
-    MKCircleView *circleView = [[MKCircleView alloc] initWithOverlay:overlay];
-    [circleView setFillColor:[UIColor redColor]];
-    [circleView setStrokeColor:[UIColor blackColor]];
-    [circleView setAlpha:0.5f];
-    return circleView;
+    self.areaOfMessage = [[MKCircleView alloc] initWithOverlay:overlay];
+    [self.areaOfMessage setFillColor:[UIColor redColor]];
+    [self.areaOfMessage setAlpha:0.5f];
+    return self.areaOfMessage;
 }
 
 -(void)mapViewDidFinishLoadingMap:(nonnull MKMapView *)mapView{
@@ -69,6 +74,15 @@
 
 
 - (IBAction)submitNewGroup:(UIButton *)sender {
+    
 }
+
+
+- (IBAction)expandArea:(UISlider *)sender {
+    [self.mapView removeOverlay:self.areaOfMessage.circle];
+    [self addCircle:sender.value * 100];
+    
+}
+
 
 @end

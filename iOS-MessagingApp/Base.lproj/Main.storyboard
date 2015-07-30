@@ -130,6 +130,9 @@
                                                 <exclude reference="Yb1-kS-Uiy"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="expandArea:" destination="blm-wR-aRk" eventType="valueChanged" id="sgf-Wp-k61"/>
+                                        </connections>
                                     </slider>
                                     <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sZv-bR-9ig" customClass="MessageUIView">
                                         <rect key="frame" x="30" y="232" width="508" height="178"/>
