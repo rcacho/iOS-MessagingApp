@@ -34,6 +34,7 @@
         
         _locationManager.delegate = self;
         [_locationManager requestWhenInUseAuthorization];
+        [_locationManager requestAlwaysAuthorization];
         NSLog(@"new location Manager in startLocationManager");
         
     }

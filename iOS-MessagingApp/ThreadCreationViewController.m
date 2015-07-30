@@ -7,6 +7,9 @@
 //
 
 #import "ThreadCreationViewController.h"
+#import "LocationManagerHandler.h"
+
+#define zoominMapArea 2100
 
 @interface ThreadCreationViewController () <MKMapViewDelegate>
 
@@ -22,8 +25,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+     self.mapView.showsUserLocation = true;
+    
 }
 
+
+- (void) initiateMap {
+    LocationManagerHandler *theLocationManagerHandler = [LocationManagerHandler defaultLocationManagerHandler];
+    
+    
+    
+    _currentLocation = [[CLLocation alloc] initWithLatitude:theLocationManagerHandler.currentLocation.coordinate.latitude longitude:theLocationManagerHandler.currentLocation.coordinate.longitude];
+    
+    CLLocationCoordinate2D zoomLocation = CLLocationCoordinate2DMake(_currentLocation.coordinate.latitude, _currentLocation.coordinate.longitude);
+    
+    MKCoordinateRegion adjustedRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, zoominMapArea, zoominMapArea);
+    
+    [_mapView setRegion:adjustedRegion animated:YES];
+    
+
+    
+}
+
+-(void)mapViewDidFinishLoadingMap:(nonnull MKMapView *)mapView{
+
+        [self initiateMap];
+}
 
 
 - (IBAction)submitNewGroup:(UIButton *)sender {

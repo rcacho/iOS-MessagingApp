@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
 @property (strong,nonatomic) CLLocation * currentLocation;
 
+@property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 
 @property CollectionHandler *collection;
 
@@ -69,6 +70,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedThread = [self.collection itemAtIndexPath:indexPath];
+    
+    self.topicLabel.text = [self.collection itemAtIndexPath:indexPath].thread.topic;
+    
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
 }
