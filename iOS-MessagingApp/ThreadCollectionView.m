@@ -109,22 +109,22 @@
    
 }
 #pragma mark - TableView for recent posts
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.arrayOfRecentLookedAtPosts.count;
-}
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"recentPosts"];
-   Collection * collectionThread = self.arrayOfRecentLookedAtPosts[indexPath.row];
-    cell.textLabel.text = collectionThread.thread.topic;
-   cell.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];
-    return cell;
-}
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//    return self.arrayOfRecentLookedAtPosts.count;
+//}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+//{
+//    return 1;
+//}
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"recentPosts"];
+//   Collection * collectionThread = self.arrayOfRecentLookedAtPosts[indexPath.row];
+//    cell.textLabel.text = collectionThread.thread.topic;
+//   cell.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];
+//    return cell;
+//}
 #pragma mark - Delegate for looking at a post
 -(void)lookedAtPost:(Collection *)lookedAtThread
 {
