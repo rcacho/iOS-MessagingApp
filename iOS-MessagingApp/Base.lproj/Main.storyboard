@@ -82,6 +82,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="avz-2T-4sl" firstAttribute="top" secondItem="NyF-pW-qQT" secondAttribute="bottom" constant="200" id="21S-6n-cd3"/>
                             <constraint firstItem="Sz3-kI-LxY" firstAttribute="height" secondItem="l0d-RQ-kMI" secondAttribute="height" id="CAK-7B-Agd"/>
@@ -109,6 +110,9 @@
                                 <exclude reference="LZc-5f-T7Z"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="138-eA-UOx" appends="YES" id="CXI-Qr-AWP"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="udS-EM-iT8">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oU1-A8-rPm">
@@ -119,14 +123,21 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="NyF-pW-qQT" id="3RJ-10-eU1"/>
+                        <outlet property="selfView" destination="S9x-9F-ueH" id="taH-Ol-wVU"/>
                         <outlet property="topicLabel" destination="Tg2-35-jXt" id="FB1-EP-b0e"/>
                         <segue destination="pvO-xo-Poq" kind="show" identifier="showThread" id="fPq-S2-DkL"/>
                         <segue destination="blm-wR-aRk" kind="show" identifier="createNewGroup" id="agw-FF-JCN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PiJ-tl-Y0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="138-eA-UOx">
+                    <connections>
+                        <action selector="pushThreadIntoView:" destination="rwz-2S-6TJ" id="s3y-Ia-XbO"/>
+                        <outlet property="delegate" destination="rwz-2S-6TJ" id="buW-vU-Zck"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="451" y="756"/>
+            <point key="canvasLocation" x="308" y="890"/>
         </scene>
         <!--Thread Creation View Controller-->
         <scene sceneID="JJV-4h-cQb">

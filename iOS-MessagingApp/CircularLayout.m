@@ -10,10 +10,17 @@
 
 #define ITEM_SIZE (CGFloat 70);
 
+@interface CircularLayout ()
+
+
+@end
+
 @implementation CircularLayout
 
 - (void)prepareLayout {
     [super prepareLayout];
+    
+    self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     CGSize size = self.collectionView.frame.size;// what is this suppose to be then?? Perhaps it should be collectionView?
     
@@ -37,8 +44,8 @@
     UICollectionViewLayoutAttributes *layoutAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
     
     layoutAttributes.size = CGSizeMake(30, 30); // is the const not being set up correctly??
-    layoutAttributes.center = CGPointMake(_center.x + _radius * cosf(2 * indexPath.item * M_PI / _cellCount),
-                                          _center.y + _radius * sinf(2 * indexPath.item * M_PI / _cellCount));
+    layoutAttributes.center = CGPointMake(_center.x + _radius * cosf(2 * (indexPath.item) * M_PI / _cellCount),
+                                          _center.y + _radius * sinf(2 * (indexPath.item) * M_PI / _cellCount));
     
     return layoutAttributes;
 }
