@@ -24,6 +24,6 @@
 
 - (Collection *)itemAtIndexPath:(NSIndexPath *)indexPath;
 
--(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius andImage:(UIImage *)image;
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius andImage:(UIImage *)image andPost:(NSString *)content;
 
 @end

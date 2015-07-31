@@ -19,9 +19,6 @@
 @property (nonatomic,strong) NSMutableArray * closeLocationsToAdd;
 @property double radiusInKm;
 
-
-
-
 @end
 
 @implementation CollectionHandler
@@ -68,7 +65,8 @@
          
      }];
 }
--(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius andImage:(UIImage *)image
+
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius andImage:(UIImage *)image andPost:(NSString *)content
 {
     MessageThread * newThead = [[MessageThread alloc]init];
     NSData *imageData = UIImagePNGRepresentation(image);
@@ -83,7 +81,14 @@
     [newThead saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"SUCCEDED");
-            Collection *thread = [[Collection alloc] initWithThread:newThead];
+
+            if (content != nil) {
+                Collection *newestCollection = [[Collection alloc] initWithThread:newThead];
+                Post *firstPost = [[Post alloc] init];
+                firstPost.content = content;
+                [newestCollection addPostMessage:firstPost];
+            }
+
         }
         else {
             NSLog(@"Fail saving");

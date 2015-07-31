@@ -9,13 +9,24 @@
 #import "circleCell.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define kWiggleBounceY 4.0f
+#define kWiggleBounceDuration 0.12
+#define kWiggleBounceDurationVariance 0.025
+
+#define kWiggleRotateAngle 0.06f
+#define kWiggleRotateDuration 0.1
+#define kWiggleRotateDurationVariance 0.025
+
+
+
 @interface circleCell ()
 
-@property (weak, nonatomic) IBOutlet UIView *view;
 
 @end
 
 @implementation circleCell
+
+
 
 
 
@@ -30,8 +41,42 @@
     
 }
 
-- (void)prepareForReuse {
+-(void)startJiggle {
+    [UIView animateWithDuration:0
+                     animations:^{
+                         [self.layer addAnimation:[self rotationAnimation] forKey:@"rotation"];
+                         [self.layer addAnimation:[self bounceAnimation] forKey:@"bounce"];
+                         self.transform = CGAffineTransformIdentity;
+                     }];
+}
 
+-(CAAnimation*)rotationAnimation {
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
+    animation.values = @[@(-kWiggleRotateAngle), @(kWiggleRotateAngle)];
+    
+    animation.autoreverses = YES;
+    animation.duration = [self randomizeInterval:kWiggleRotateDuration
+                                    withVariance:kWiggleRotateDurationVariance];
+    animation.repeatCount = HUGE_VALF;
+    
+    return animation;
+}
+
+-(CAAnimation*)bounceAnimation {
+    CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.translation.y"];
+    animation.values = @[@(kWiggleBounceY), @(0.0)];
+    
+    animation.autoreverses = YES;
+    animation.duration = [self randomizeInterval:kWiggleBounceDuration
+                                    withVariance:kWiggleBounceDurationVariance];
+    animation.repeatCount = HUGE_VALF;
+    
+    return animation;
+}
+
+-(NSTimeInterval)randomizeInterval:(NSTimeInterval)interval withVariance:(double)variance {
+    double random = (arc4random_uniform(1000) - 500.0) / 500.0;
+    return interval + variance * random;
 }
 
 @end

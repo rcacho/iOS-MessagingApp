@@ -10,4 +10,6 @@
 
 @interface circleCell : UICollectionViewCell
 
+- (void)startJiggle;
+
 @end

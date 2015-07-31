@@ -30,6 +30,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 @property (weak, nonatomic) IBOutlet UILabel *groupRadiusLabel;
+@property (strong,nonatomic) Collection * collection;
 
 @end
 
@@ -37,10 +38,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
    
-    
+     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+     [self.tableView addSubview:refreshControl];
+   
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
     [self.thread fetchThreadPosts];
@@ -180,6 +182,18 @@
     else {
         NSLog(@"blank message");
     }
+}
+#pragma mark - Refrsh method
+-(void)refresh:(UIRefreshControl *)refresh
+{
+    refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"refreshing data"];
+    [self.tableView reloadData];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MMMM d, h:mm a"];
+    NSString * lastUpdated = [NSString stringWithFormat:@"Last updated %@",[formatter stringFromDate:[NSDate date]]];
+    refresh.attributedTitle = [[NSAttributedString alloc]initWithString:lastUpdated];
+    [refresh endRefreshing];
+    
 }
 
 

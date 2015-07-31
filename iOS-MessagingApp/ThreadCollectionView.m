@@ -15,7 +15,7 @@
 #import "AppDelegate.h"
 #import "circleCell.h"
 
-@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -24,7 +24,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
 
 @property (strong,nonatomic) CLLocation * currentLocation;
+
 @property (strong,nonatomic) NSMutableArray * arrayOfRecentLookedAtPosts;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableViewForRecentLookedAtPosts;
 
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
@@ -32,6 +34,12 @@
 @property CollectionHandler *collection;
 
 @property Collection *selectedThread;
+
+@property (nonatomic) NSInteger currentNumberOfThreadsShown;
+
+@property BOOL shouldIncreaseThreads;
+
+@property CGFloat startingXPanCoordinate;
 
 @end
 
@@ -59,19 +67,34 @@
 
 }
 
+
+- (void)setCurrentNumberOfThreadsShown:(NSInteger)currentNumberOfThreadsShown {
+    if (currentNumberOfThreadsShown >= 0 && currentNumberOfThreadsShown <= [self.collection numberOfItemsInSection]) {
+        _currentNumberOfThreadsShown = currentNumberOfThreadsShown;
+    } else if (labs(currentNumberOfThreadsShown) == 2) {
+        if (_currentNumberOfThreadsShown > currentNumberOfThreadsShown) {
+            _currentNumberOfThreadsShown--;
+        } else {
+            _currentNumberOfThreadsShown++;
+        }
+    } else {
+        for (circleCell *circle in self.collectionView.visibleCells) {
+            [circle startJiggle];
+        }
+    }
+}
+
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showThread"]) {
-        
         [segue.destinationViewController setThread:self.selectedThread];
-        
-    }
-  else if ([segue.identifier isEqualToString:@"createNewGroup"]) {
+    } else if ([segue.identifier isEqualToString:@"createNewGroup"]) {
         [segue.destinationViewController setCollection:self.collection];
     }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.collection numberOfItemsInSection];
+    return self.currentNumberOfThreadsShown;
 }
 
 
@@ -98,22 +121,67 @@
          [self.collectionView reloadData];
    
 }
-
-#pragma mark - TableView for recent posts
-
-#pragma mark - Delegate for looking at a post
-
-
 - (IBAction)goToCreationPage:(UIBarButtonItem *)sender {
     [self performSegueWithIdentifier:@"createNewGroup" sender:sender];
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+}
 
 
+- (IBAction)pushThreadIntoView:(UIPanGestureRecognizer *)sender {
+    // recognize what direction the pan went
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.startingXPanCoordinate = [sender velocityInView:self.view].x;
+
+    }
+    
+    if (sender.state == UIGestureRecognizerStateChanged) {
+        
+        NSString *direction = [self calculateDirection:sender];
+        if ([direction isEqualToString:@"left"]) {
+            self.shouldIncreaseThreads = NO;
+        } else {
+            self.shouldIncreaseThreads = YES;
+        }
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        
+        NSInteger distance = [self calculateDistance:sender];
+        
+        if (self.shouldIncreaseThreads) {
+             self.currentNumberOfThreadsShown += distance;
+        } else  {
+            self.currentNumberOfThreadsShown -= distance;
+        }
+        
+        [self.collectionView reloadData];
+    }
+}
+
+- (NSString *)calculateDirection:(UIPanGestureRecognizer *)recognizer {
+    CGPoint velocity = [recognizer velocityInView:self.view];
+    if (velocity.x > 0) {
+        return @"right";
+    }
+    
+    return @"left";
+}
+
+- (NSInteger)calculateDistance:(UIPanGestureRecognizer *)recognizer {
+    CGFloat endPoint = [recognizer velocityInView:self.view].x;
+    NSInteger distance = fabs(self.startingXPanCoordinate - endPoint);
+    if (distance > 400) {
+        return 2;
+    } else {
+        return 1;
+    }
+}
 
 
+#pragma mark - TableView for recent posts
 
-
+#pragma mark - Delegate for looking at a post
 
 
 

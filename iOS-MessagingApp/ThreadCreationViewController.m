@@ -11,18 +11,15 @@
 
 #define zoominMapArea 2100
 
-
 @interface ThreadCreationViewController () <MKMapViewDelegate, UITextFieldDelegate>
-
 
 @property (weak, nonatomic) IBOutlet UITextField *topicTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *postTextField;
-@property (strong,nonatomic) UIImage * imageForGroup;
+
 @property (weak, nonatomic) IBOutlet UISlider *distanceSlider;
-- (IBAction)addGroupImage:(id)sender;
 
-
+@property (strong,nonatomic) UIImage * imageForGroup;
 
 @property MKCircleView *areaOfMessage;
 
@@ -34,44 +31,28 @@
     [super viewDidLoad];
     
      self.mapView.showsUserLocation = true;
+    
 }
-
-
 
 #pragma mark - Map Methods
 
 
 - (void) initiateMap {
     LocationManagerHandler *theLocationManagerHandler = [LocationManagerHandler defaultLocationManagerHandler];
-    
-    
-    
+
     _currentLocation = [[CLLocation alloc] initWithLatitude:theLocationManagerHandler.currentLocation.coordinate.latitude longitude:theLocationManagerHandler.currentLocation.coordinate.longitude];
-    
 
     CLLocationCoordinate2D zoomLocation = CLLocationCoordinate2DMake(_currentLocation.coordinate.latitude - 0.0075, _currentLocation.coordinate.longitude - 0.0008);
-
-    
     MKCoordinateRegion adjustedRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, zoominMapArea, zoominMapArea);
     
     [_mapView setRegion:adjustedRegion animated:YES];
 
-    
-
-    
 }
+
 
 -(void)mapViewDidFinishLoadingMap:(nonnull MKMapView *)mapView{
-
         [self initiateMap];
 }
-
-
-
-
-
-
-
 
 #pragma mark - Circular Overlay
 
@@ -93,14 +74,7 @@
 
 - (IBAction)submitNewGroup:(UIButton *)sender {
     
-     [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong:[NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius]andImage:self.imageForGroup];
-    
-   
-    
-    if (self.postTextField.text != nil) {
-        
-    }
-    
+    [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong:[NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius]andImage:self.imageForGroup andPost:self.postTextField.text];
 }
 
 - (IBAction)expandArea:(UISlider *)sender {

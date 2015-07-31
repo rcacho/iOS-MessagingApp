@@ -20,8 +20,8 @@
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 
-
 @property (strong,nonatomic) MessageThread * selectedThread;
+
 @property (strong,nonatomic) CollectionHandler * collection;
 
 @end
