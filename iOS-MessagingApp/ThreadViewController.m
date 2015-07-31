@@ -50,7 +50,6 @@
     PFFile *userFile = self.thread.thread.image;
     NSData *userPicData = [userFile getData];
     UIImage * image = [UIImage imageWithData:userPicData];
-    self.imageViewForGroup.image = image;
     
     self.posts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.thread.posts, @"posts", nil];
     

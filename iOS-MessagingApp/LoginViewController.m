@@ -123,7 +123,6 @@
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
      self.scrollView.scrollEnabled = NO;
-    //[self t]
     
 }
 - (void)deregisterFromKeyboardNotifications {
