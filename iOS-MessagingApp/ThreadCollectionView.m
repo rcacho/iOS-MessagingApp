@@ -15,11 +15,14 @@
 #import "AppDelegate.h"
 #import "circleCell.h"
 
-@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,lookedAtPost>
+@interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource,UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 @property (weak, nonatomic) IBOutlet UITextField *groupTopicTextField;
+
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
+
 @property (strong,nonatomic) CLLocation * currentLocation;
 @property (strong,nonatomic) NSMutableArray * arrayOfRecentLookedAtPosts;
 @property (weak, nonatomic) IBOutlet UITableView *tableViewForRecentLookedAtPosts;
@@ -33,14 +36,7 @@
 @end
 
 @implementation ThreadCollectionView
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        self.arrayOfRecentLookedAtPosts = [NSMutableArray arrayWithCapacity:5];
-    }
-    return self;
-}
+
 
 
 - (void)viewDidLoad {
@@ -63,38 +59,28 @@
 
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showThread"]) {
+        
         [segue.destinationViewController setThread:self.selectedThread];
-        ThreadViewController * vc = segue.destinationViewController;
-        [vc setDelegate:self];
+        
     }
-    if([segue.identifier isEqualToString:@"recentShowThread"])
-    {
-        UITableViewCell * selectedCell = (UITableViewCell *)sender;
-        NSIndexPath *clickedPost = [self.tableViewForRecentLookedAtPosts indexPathForCell:selectedCell];
-        Collection * collectionOfTableViewCellHit = self.arrayOfRecentLookedAtPosts[clickedPost.row];
-        [segue.destinationViewController setThread:collectionOfTableViewCellHit];
-        
-       
-        
-      //  [segue.destinationViewController setThread:thread];
-        
-        
+  else if ([segue.identifier isEqualToString:@"createNewGroup"]) {
+        [segue.destinationViewController setCollection:self.collection];
     }
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.collection numberOfItemsInSection];
 }
 
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     circleCell *aThreadCell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"threadCell" forIndexPath:indexPath];
     return aThreadCell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedThread = [self.collection itemAtIndexPath:indexPath];
     
     self.topicLabel.text = [self.collection itemAtIndexPath:indexPath].thread.topic;
@@ -102,8 +88,8 @@
     [self performSegueWithIdentifier:@"showThread" sender:self];
 
 }
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     return [textField resignFirstResponder];
 }
 
@@ -112,40 +98,23 @@
          [self.collectionView reloadData];
    
 }
+
 #pragma mark - TableView for recent posts
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    return self.arrayOfRecentLookedAtPosts.count;
-//}
-//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    return 1;
-//}
-//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"recentPosts"];
-//   Collection * collectionThread = self.arrayOfRecentLookedAtPosts[indexPath.row];
-//    cell.textLabel.text = collectionThread.thread.topic;
-//   cell.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];
-//    return cell;
-//}
+
 #pragma mark - Delegate for looking at a post
--(void)lookedAtPost:(Collection *)lookedAtThread
-{
-   
-    if(self.arrayOfRecentLookedAtPosts.count == 5)
-    {
-        [self.arrayOfRecentLookedAtPosts removeLastObject];
-        [self.arrayOfRecentLookedAtPosts insertObject:lookedAtThread atIndex:0];
-        [self.tableViewForRecentLookedAtPosts reloadData];
-        
-    }
-    else {
-         [self.arrayOfRecentLookedAtPosts insertObject:lookedAtThread atIndex:0];
-        [self.tableViewForRecentLookedAtPosts reloadData];
-    }
-    
+
+
+- (IBAction)goToCreationPage:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"createNewGroup" sender:sender];
 }
+
+
+
+
+
+
+
+
 
 
 @end

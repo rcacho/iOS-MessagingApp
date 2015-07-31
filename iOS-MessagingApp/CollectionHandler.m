@@ -9,11 +9,18 @@
 #import "CollectionHandler.h"
 #import <Parse/Parse.h>
 #import <CoreLocation/CoreLocation.h>
+#import "LocationManagerHandler.h"
 
 @interface CollectionHandler ()
 
 @property NSArray *threads;
+
 @property (nonatomic) CLLocation * currentLocation;
+@property (nonatomic,strong) NSMutableArray * closeLocationsToAdd;
+@property double radiusInKm;
+
+
+
 
 @end
 
@@ -22,39 +29,61 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+       
         _collections = [[NSMutableArray alloc] init];
-    }
+           }
     return self;
 }
 
 - (void)fetchThreads {
+     LocationManagerHandler *theLocationManagerHandler = [LocationManagerHandler defaultLocationManagerHandler];
+    _currentLocation = [[CLLocation alloc] initWithLatitude:theLocationManagerHandler.currentLocation.coordinate.latitude longitude:theLocationManagerHandler.currentLocation.coordinate.longitude];
+    
     PFQuery *query = [PFQuery queryWithClassName:@"MessageThread"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            NSLog(@"Recieved Data Successfully");
-            self.threads = objects;
-            [self prepareCollections];
-            [self.collectionView reloadData];
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+    
+    PFGeoPoint * point = [PFGeoPoint geoPointWithLocation:self.currentLocation];
+    [query whereKey:@"latAndLng" nearGeoPoint:point];
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error)
+     {
+          NSMutableArray * tempArray = [[NSMutableArray alloc]init];
+         for(int i =0;i< [objects count]; i++)
+         {
+         MessageThread * closeThread = objects[i];
+         double distanceInKm = [point distanceInKilometersTo:closeThread.latAndLng];
+         double distanceInM = distanceInKm / 1000;
+         NSNumber * distanceInMNsNumber = [NSNumber numberWithFloat:distanceInM];
+            
+             if(distanceInMNsNumber < closeThread.radius)
+             {
+                 [tempArray addObject:closeThread];
+                 
+             }
+         
+         }
+         self.threads = tempArray;
+         [self prepareCollections];
+         [self.collectionView reloadData];
+
+         
+     }];
 }
--(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSString *)radius
+-(void)addNewThread:(NSString *)topic withLat:(NSNumber *)lat andLong:(NSNumber *)lng andRadius:(NSNumber *)radius andImage:(UIImage *)image
 {
     MessageThread * newThead = [[MessageThread alloc]init];
+    NSData *imageData = UIImagePNGRepresentation(image);
+    PFFile *imageFile = [PFFile fileWithName:@"Profileimage.png" data:imageData];
+    newThead.image = imageFile;
     newThead.topic = topic;
     newThead.lat = lat;
     newThead.lng = lng;
-    float newRadius = [radius floatValue];
-    NSNumber * radiusNumber = [NSNumber numberWithFloat:newRadius];
-    newThead.radius = radiusNumber;
+    newThead.radius = radius;
     newThead.latAndLng = [PFGeoPoint geoPointWithLocation:self.currentLocation];
     [self didAddArray];
     [newThead saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"SUCCEDED");
+            Collection *thread = [[Collection alloc] initWithThread:newThead];
         }
         else {
             NSLog(@"Fail saving");
@@ -64,10 +93,9 @@
     
 }
 -(void)didAddArray {
-    [self fetchThreads];
     [self.collections removeAllObjects];
-    [self prepareCollections];
-}
+    [self fetchThreads];
+   }
 
 - (void)prepareCollections {
     for (MessageThread *thread in self.threads) {

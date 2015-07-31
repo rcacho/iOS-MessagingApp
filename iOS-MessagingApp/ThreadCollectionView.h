@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface ThreadCollectionView : UIViewController
+@interface ThreadCollectionView : UIViewController 
 
 // this probably should be left up to some delegate rather than this strategy
 - (void)reloadData;

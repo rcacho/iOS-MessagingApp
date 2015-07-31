@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerBubbleView;
 
 @property (weak, nonatomic) IBOutlet UIView *viewToHide;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewForGroup;
 
 @property UITextField  *activeTextField;
 
@@ -36,9 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.delegate lookedAtPost:self.thread];
 
     
+   
     
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
@@ -46,6 +47,10 @@
     
     self.topicLabel.text = self.thread.thread.topic;
     self.groupRadiusLabel.text = [NSString stringWithFormat:@"Group Radius: %@ meters",self.thread.thread.radius];
+    PFFile *userFile = self.thread.thread.image;
+    NSData *userPicData = [userFile getData];
+    UIImage * image = [UIImage imageWithData:userPicData];
+    self.imageViewForGroup.image = image;
     
     self.posts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.thread.posts, @"posts", nil];
     

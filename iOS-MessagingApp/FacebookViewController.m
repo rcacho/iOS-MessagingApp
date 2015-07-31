@@ -39,21 +39,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self manageFacebookLogin];
-   
     
     
+    
+    
+}
 
-  }
--(void)viewDidAppear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-}
-- (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 
 
@@ -65,13 +56,13 @@
         [UIView setAnimationsEnabled:NO];
         self.view.hidden = YES;
         
+        
         [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [UIView setAnimationsEnabled:NO];
             self.view.hidden = NO;
-            [PFUser logOut];
         });
-
+        
     } else if (![FBSDKAccessToken currentAccessToken] && ![PFUser currentUser]) {
         
         [self setUpFacebookLoginButton];
@@ -89,40 +80,40 @@
             [UIView setAnimationsEnabled:NO];
             self.view.hidden = NO;
         });
-
+        
     }
-
+    
 }
 
 
 - (IBAction)login:(id)sender {
     if([self checkTextField:self.usernameTextField] ==1 && [self checkTextField:self.passwordTextField] ==1 && [self checkTextField:self.emailTextField] ==1)
     {
-    PFUser * newUser = [PFUser user];
-    if (self.dataForPicture == nil) {
-        NSData *dataForPicture = UIImagePNGRepresentation([UIImage imageNamed:@"profile-photo1"]);
-        PFFile *imageFile = [PFFile fileWithName:@"image.png" data:dataForPicture];
-        [newUser setObject:imageFile forKey:@"profilePic"];
-    } else {
-        PFFile *imageFile = [PFFile fileWithName:@"image.png" data:self.dataForPicture];
-        [newUser setObject:imageFile forKey:@"profilePic"];
-    }
+        PFUser * newUser = [PFUser user];
+        if (self.dataForPicture == nil) {
+            NSData *dataForPicture = UIImagePNGRepresentation([UIImage imageNamed:@"profile-photo1"]);
+            PFFile *imageFile = [PFFile fileWithName:@"image.png" data:dataForPicture];
+            [newUser setObject:imageFile forKey:@"profilePic"];
+        } else {
+            PFFile *imageFile = [PFFile fileWithName:@"image.png" data:self.dataForPicture];
+            [newUser setObject:imageFile forKey:@"profilePic"];
+        }
         
-
-    newUser.username = self.usernameTextField.text;
-    newUser.password = self.passwordTextField.text;
-    newUser.email = self.emailTextField.text;
-     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-      {
-          if(succeeded)
-          {
-              NSLog(@"saved");
-               [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
-          }
-          else {
-              NSLog(@"error");
-          }
-      }];
+        
+        newUser.username = self.usernameTextField.text;
+        newUser.password = self.passwordTextField.text;
+        newUser.email = self.emailTextField.text;
+        [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+         {
+             if(succeeded)
+             {
+                 NSLog(@"saved");
+                 [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
+             }
+             else {
+                 NSLog(@"error");
+             }
+         }];
     }
 }
 
@@ -135,7 +126,7 @@
 {
     [loginButton setHidden:YES];
     UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"You are logged in with facebook!" message:@"Now please fill out account details below" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-   
+    
 }
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
 {
@@ -166,7 +157,7 @@
     self.loginButton.center = self.view.center;
     [self.view addSubview:self.loginButton];
     self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends",@"user_about_me",@"user_relationships",@"user_birthday",@"user_location"];
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_relationships", @"user_birthday", @"user_location"];
+    
 }
 
 
@@ -184,7 +175,7 @@
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (!error) {
-             NSLog(@"fetched user:%@", result);
+            NSLog(@"fetched user:%@", result);
             // result is a dictionary with the user's Facebook data
             NSLog(@"result is %@",result);
             NSDictionary *userData = (NSDictionary *)result;
@@ -215,30 +206,7 @@
         self.view.hidden = NO;
     });
 }
-#pragma mark - Scrolling textfield up and down
-- (void)keyboardWillShow:(NSNotification*)notification
-{
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-    CGRect rect = self.view.frame; rect.size.height -= keyboardSize.height;
-    
-    
-    if (!CGRectContainsPoint(rect, self.usernameTextField.frame.origin))
-    {
-        CGPoint scrollPoint = CGPointMake(0.0, self.usernameTextField.frame.origin.y - (keyboardSize.height - self.usernameTextField.frame.size.height));
-        [self.scrollView setContentOffset:scrollPoint animated:NO];
-    } 
-}
-- (void)keyboardWillHide:(NSNotification *)notification
-{
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-}
+
 
 
 @end

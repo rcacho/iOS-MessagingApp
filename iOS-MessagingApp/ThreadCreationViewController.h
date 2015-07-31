@@ -10,8 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "MessageThread.h"
+#import "CollectionHandler.h"
 
-@interface ThreadCreationViewController : UIViewController
+@interface ThreadCreationViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
@@ -19,6 +20,8 @@
 
 @property (strong,nonatomic) CLLocationManager *locationManager;
 
+
 @property (strong,nonatomic) MessageThread * selectedThread;
+@property (strong,nonatomic) CollectionHandler * collection;
 
 @end
