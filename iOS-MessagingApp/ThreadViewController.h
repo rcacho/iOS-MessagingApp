@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MessageThread.h"
 #import "Collection.h"
+\
 
 @interface ThreadViewController : UIViewController
-
 @property (nonatomic) Collection *thread;
 
 - (void)reloadData;

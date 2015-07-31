@@ -16,6 +16,7 @@
 @property NSNumber * radius;
 @property NSNumber * lat;
 @property NSNumber * lng;
+@property PFFile * image;
 
 @property NSMutableArray *posts;
 

@@ -16,7 +16,6 @@
 #import "circleCell.h"
 
 @interface ThreadCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet UIView *selfView;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -25,6 +24,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *groupRadiusTextField;
 
 @property (strong,nonatomic) CLLocation * currentLocation;
+
+@property (strong,nonatomic) NSMutableArray * arrayOfRecentLookedAtPosts;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableViewForRecentLookedAtPosts;
 
 @property (weak, nonatomic) IBOutlet UILabel *topicLabel;
 
@@ -43,8 +46,10 @@
 @implementation ThreadCollectionView
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableViewForRecentLookedAtPosts.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];
     [self.navigationItem setHidesBackButton:YES];
 
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -62,6 +67,7 @@
 
 }
 
+
 - (void)setCurrentNumberOfThreadsShown:(NSInteger)currentNumberOfThreadsShown {
     if (currentNumberOfThreadsShown >= 0 && currentNumberOfThreadsShown <= [self.collection numberOfItemsInSection]) {
         _currentNumberOfThreadsShown = currentNumberOfThreadsShown;
@@ -77,6 +83,7 @@
         }
     }
 }
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showThread"]) {
@@ -153,7 +160,7 @@
 }
 
 - (NSString *)calculateDirection:(UIPanGestureRecognizer *)recognizer {
-    CGPoint velocity = [recognizer velocityInView:self.selfView];
+    CGPoint velocity = [recognizer velocityInView:self.view];
     if (velocity.x > 0) {
         return @"right";
     }
@@ -170,5 +177,12 @@
         return 1;
     }
 }
+
+
+#pragma mark - TableView for recent posts
+
+#pragma mark - Delegate for looking at a post
+
+
 
 @end

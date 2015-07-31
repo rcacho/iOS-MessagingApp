@@ -22,6 +22,7 @@
 		81374DC61B698D3B007926AD /* LocationManagerHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DC51B698D3B007926AD /* LocationManagerHandler.m */; };
 		81374DC91B698D5B007926AD /* circleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DC81B698D5B007926AD /* circleCell.m */; };
 		81374DCC1B698D6D007926AD /* CircularLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DCB1B698D6D007926AD /* CircularLayout.m */; };
+		815B81C41B6A92B5005B658D /* ThreadCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815B81C31B6A92B5005B658D /* ThreadCreationViewController.m */; };
 		81CFCFF91B68126E00FE3B59 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 81CFCFE01B68126E00FE3B59 /* FacebookSDKStrings.bundle */; };
 		81CFCFFA1B68126E00FE3B59 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFE11B68126E00FE3B59 /* FBAudienceNetwork.framework */; };
 		81CFCFFB1B68126E00FE3B59 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFE21B68126E00FE3B59 /* FBSDKMessengerShareKit.framework */; };
@@ -49,7 +50,6 @@
 		81CFD0111B68126E00FE3B59 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFF81B68126E00FE3B59 /* FBSDKShareKit.framework */; };
 		81CFD0161B6814F700FE3B59 /* Collection.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0131B6814F700FE3B59 /* Collection.m */; };
 		81CFD0171B6814F700FE3B59 /* CollectionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0151B6814F700FE3B59 /* CollectionHandler.m */; };
-		81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */; };
 		81CFD01D1B68291900FE3B59 /* FacebookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD01C1B68291900FE3B59 /* FacebookViewController.m */; };
 		81CFD0201B687DEB00FE3B59 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD01F1B687DEB00FE3B59 /* LoginViewController.m */; };
 /* End PBXBuildFile section */
@@ -94,6 +94,8 @@
 		81374DC81B698D5B007926AD /* circleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = circleCell.m; sourceTree = "<group>"; };
 		81374DCA1B698D6D007926AD /* CircularLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularLayout.h; sourceTree = "<group>"; };
 		81374DCB1B698D6D007926AD /* CircularLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularLayout.m; sourceTree = "<group>"; };
+		815B81C21B6A92B5005B658D /* ThreadCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadCreationViewController.h; sourceTree = "<group>"; };
+		815B81C31B6A92B5005B658D /* ThreadCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadCreationViewController.m; sourceTree = "<group>"; };
 		81CFCFE01B68126E00FE3B59 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = ../../FacebookSDK/FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		81CFCFE11B68126E00FE3B59 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = ../../FacebookSDK/FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		81CFCFE21B68126E00FE3B59 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
@@ -123,8 +125,6 @@
 		81CFD0131B6814F700FE3B59 /* Collection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Collection.m; sourceTree = "<group>"; };
 		81CFD0141B6814F700FE3B59 /* CollectionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionHandler.h; sourceTree = "<group>"; };
 		81CFD0151B6814F700FE3B59 /* CollectionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionHandler.m; sourceTree = "<group>"; };
-		81CFD0181B681CA000FE3B59 /* MaoViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaoViewViewController.h; sourceTree = "<group>"; };
-		81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaoViewViewController.m; sourceTree = "<group>"; };
 		81CFD01B1B68291900FE3B59 /* FacebookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookViewController.h; sourceTree = "<group>"; };
 		81CFD01C1B68291900FE3B59 /* FacebookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookViewController.m; sourceTree = "<group>"; };
 		81CFD01E1B687DEB00FE3B59 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -209,8 +209,6 @@
 				81CFD0151B6814F700FE3B59 /* CollectionHandler.m */,
 				3C3E1C7C1B66CC0400D3AF45 /* Post.h */,
 				3C3E1C7D1B66CC0400D3AF45 /* Post.m */,
-				81CFD0181B681CA000FE3B59 /* MaoViewViewController.h */,
-				81CFD0191B681CA000FE3B59 /* MaoViewViewController.m */,
 				3C3E1C7F1B66CC1000D3AF45 /* MessageThread.h */,
 				3C3E1C801B66CC1000D3AF45 /* MessageThread.m */,
 				81374DC41B698D3B007926AD /* LocationManagerHandler.h */,
@@ -219,6 +217,8 @@
 				81CFD01F1B687DEB00FE3B59 /* LoginViewController.m */,
 				3C3E1C8E1B66D12500D3AF45 /* PostCell.h */,
 				3C3E1C8F1B66D12500D3AF45 /* PostCell.m */,
+				815B81C21B6A92B5005B658D /* ThreadCreationViewController.h */,
+				815B81C31B6A92B5005B658D /* ThreadCreationViewController.m */,
 				3C3E1C8B1B66D04B00D3AF45 /* ThreadViewController.h */,
 				3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */,
 				3C3E1C881B66CF0000D3AF45 /* ThreadCell.h */,
@@ -398,6 +398,7 @@
 				81CFD01D1B68291900FE3B59 /* FacebookViewController.m in Sources */,
 				3C3E1C8A1B66CF0000D3AF45 /* ThreadCell.m in Sources */,
 				3C3E1C901B66D12500D3AF45 /* PostCell.m in Sources */,
+				815B81C41B6A92B5005B658D /* ThreadCreationViewController.m in Sources */,
 				3C3E1C871B66CCFE00D3AF45 /* ThreadCollectionView.m in Sources */,
 				81374DC91B698D5B007926AD /* circleCell.m in Sources */,
 				3C3E1C5C1B66CBE900D3AF45 /* AppDelegate.m in Sources */,
@@ -406,7 +407,6 @@
 				81CFD0171B6814F700FE3B59 /* CollectionHandler.m in Sources */,
 				3C3E1C7E1B66CC0400D3AF45 /* Post.m in Sources */,
 				81CFD0161B6814F700FE3B59 /* Collection.m in Sources */,
-				81CFD01A1B681CA000FE3B59 /* MaoViewViewController.m in Sources */,
 				81374DCC1B698D6D007926AD /* CircularLayout.m in Sources */,
 				81CFD0201B687DEB00FE3B59 /* LoginViewController.m in Sources */,
 			);

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerBubbleView;
 
 @property (weak, nonatomic) IBOutlet UIView *viewToHide;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewForGroup;
 
 @property UITextField  *activeTextField;
 
@@ -36,8 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- //   self.tableView.backgroundColor = [UIColor colorWithRed:.44 green:.50 blue:.56 alpha:1.0];
-   // self.tableView.backgroundColor = [UIColor whiteColor];
+
+    
+   
     
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
@@ -45,6 +47,10 @@
     
     self.topicLabel.text = self.thread.thread.topic;
     self.groupRadiusLabel.text = [NSString stringWithFormat:@"Group Radius: %@ meters",self.thread.thread.radius];
+    PFFile *userFile = self.thread.thread.image;
+    NSData *userPicData = [userFile getData];
+    UIImage * image = [UIImage imageWithData:userPicData];
+    self.imageViewForGroup.image = image;
     
     self.posts = [[NSMutableDictionary alloc] initWithObjectsAndKeys:self.thread.posts, @"posts", nil];
     
@@ -173,9 +179,10 @@
     self.activeTextField.text = @"";
     }
     else {
-        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Please enter a message" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
+        NSLog(@"blank message");
     }
 }
+
+
 
 @end
