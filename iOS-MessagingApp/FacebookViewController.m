@@ -10,7 +10,7 @@
 #import "ThreadCollectionView.h"
 
 //WHEN FIRST LOGIN TO facebook
-@interface FacebookViewController () <FBSDKLoginButtonDelegate,UITextFieldDelegate>
+@interface FacebookViewController () <UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic,strong) NSString * pictureUrl;
 
@@ -20,16 +20,8 @@
 
 @property (nonatomic,strong) NSData * dataForPicture;
 
-@property FBSDKLoginButton *loginButton;
-
-@property FBSDKProfilePictureView *fbPhoto;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-
-
-@property UIImageView *profilePictureImageView;
-@property (nonatomic,strong) FBSDKProfile * profile;
-
 
 @end
 
@@ -39,10 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self manageFacebookLogin];
-    
-    
-    
-    
 }
 
 
@@ -50,37 +38,21 @@
 
 
 - (void)manageFacebookLogin {
-    // check to see if the user is already logged in
-    if ([FBSDKAccessToken currentAccessToken] && [PFUser currentUser]) {
-        NSLog(@"%@ is logged in",[PFUser currentUser]);
+    
+
+        
+     if ([PFUser currentUser])
+     {
         [UIView setAnimationsEnabled:NO];
         self.view.hidden = YES;
-        
-        
-        [self performSegueWithIdentifier:@"getOutOfLogin" sender:self];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIView setAnimationsEnabled:NO];
-            self.view.hidden = NO;
-        });
-        
-    } else if (![FBSDKAccessToken currentAccessToken] && ![PFUser currentUser]) {
-        
-        [self setUpFacebookLoginButton];
-        [self setUpProfilePicture];
-        [self getFacebookInformation];
-        //put logic here to login
-        
-    } else if([FBSDKAccessToken currentAccessToken] && ![PFUser currentUser])
-    {
-        [UIView setAnimationsEnabled:NO];
-        self.view.hidden = YES;
+         [PFUser logOut];
         
         [self performSegueWithIdentifier:@"loginSegue" sender:self];
+        
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [UIView setAnimationsEnabled:NO];
             self.view.hidden = NO;
         });
-        
     }
     
 }
@@ -126,6 +98,7 @@
 {
     [loginButton setHidden:YES];
     UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"You are logged in with facebook!" message:@"Now please fill out account details below" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alertView show];
     
 }
 -(void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
@@ -150,61 +123,35 @@
 
 #pragma mark - facebook layout Methods
 
-- (void)setUpFacebookLoginButton {
-    // set up the facebook login button
-    self.loginButton = [[FBSDKLoginButton alloc] init];
-    self.loginButton.delegate = self;
-    self.loginButton.center = self.view.center;
-    [self.view addSubview:self.loginButton];
-    self.loginButton.readPermissions = @[@"public_profile", @"email", @"user_friends",@"user_about_me",@"user_relationships",@"user_birthday",@"user_location"];
-    
-}
 
-
-
-- (void)setUpProfilePicture {
-    // set up the profile picture
-    [self.fbPhoto setProfileID:@"user_id"];
-    [self.fbPhoto setPictureMode:FBSDKProfilePictureModeSquare];
-    [self.view addSubview:self.fbPhoto];
-}
-
-- (void)getFacebookInformation {
-    // this is gettingninformation from facebook??
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"picture",@"fields",nil];
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
-            NSLog(@"fetched user:%@", result);
-            // result is a dictionary with the user's Facebook data
-            NSLog(@"result is %@",result);
-            NSDictionary *userData = (NSDictionary *)result;
-            NSDictionary * resultsDictionary = [result objectForKey:@"picture"];
-            NSDictionary * dataDictionary = resultsDictionary[@"data"];
-            NSString * pictureURL = dataDictionary[@"url"];
-            NSString * email = result[@"email"];
-            self.pictureUrl = pictureURL;
-            NSLog(@"picture url is %@",self.pictureUrl);
-            NSURL * url = [NSURL URLWithString:pictureURL];
-            NSData * pictureData = [NSData dataWithContentsOfURL:url];
-            UIImage * downloadedImage = [UIImage imageWithData:pictureData];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.profilePictureImageView.image = downloadedImage;
-                self.dataForPicture = UIImagePNGRepresentation(downloadedImage);
-                
-                
-            });
-            
-        }
-        
-    }];
-}
 -(void)getOutOfSignUpView
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView setAnimationsEnabled:NO];
         self.view.hidden = NO;
     });
+}
+- (IBAction)addImage:(id)sender {
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentViewController:picker animated:YES completion:NULL];
+    
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    //  self.imageView.image = chosenImage;
+    self.dataForPicture = UIImagePNGRepresentation(chosenImage);
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
 }
 
 

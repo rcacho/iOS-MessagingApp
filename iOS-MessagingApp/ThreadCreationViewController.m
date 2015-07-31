@@ -75,6 +75,7 @@
 - (IBAction)submitNewGroup:(UIButton *)sender {
     
     [self.collection addNewThread:self.topicTextField.text withLat:[NSNumber numberWithFloat:self.currentLocation.coordinate.latitude] andLong:[NSNumber numberWithFloat:self.currentLocation.coordinate.longitude] andRadius:[NSNumber numberWithFloat:self.areaOfMessage.circle.radius]andImage:self.imageForGroup andPost:self.postTextField.text];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)expandArea:(UISlider *)sender {

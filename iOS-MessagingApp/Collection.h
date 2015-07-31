@@ -19,6 +19,8 @@
 
 @property ThreadViewController *tableView;
 
+@property int count;
+
 - (instancetype)initWithThread:(MessageThread *)thread;
 
 - (void)addPostMessage:(Post *)post;

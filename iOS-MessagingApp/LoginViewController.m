@@ -32,6 +32,7 @@
     [super viewWillAppear:animated];
     
     [self registerForKeyboardNotifications];
+   //[[self navigationController] setNavigationBarHidden:YES animated:YES];
     
 }
 
@@ -52,7 +53,7 @@
     if([username length] == 0 || [password length]  == 0)
     {
         
-        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"OOps" message:@"Make sure you enter a username and password address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:@"Ooos" message:@"Make sure you enter a username and password address" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
     }
     

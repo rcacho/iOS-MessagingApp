@@ -10,6 +10,7 @@
 #import "ThreadViewController.h"
 
 @implementation Collection
+int count = 0;
 
 - (instancetype)initWithThread:(MessageThread *)thread {
     self = [super init];
@@ -43,12 +44,16 @@
     for (Post *post in posts) {
         [self.posts addObject:post];
     }
+      
 }
 
 - (void)addPostMessage:(Post *)post {
+    if(![self.posts containsObject:post])
+    {
     [self.posts addObject:post];
     [post setObject:self.thread forKey:@"createdBy"];
     [self save:post];
+    }
     
 }
 

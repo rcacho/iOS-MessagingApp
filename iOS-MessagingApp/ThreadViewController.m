@@ -35,6 +35,11 @@
 @end
 
 @implementation ThreadViewController
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,10 +47,15 @@
      UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
      [self.tableView addSubview:refreshControl];
+    self.tableView.allowsSelection = NO;
    
     [self registerForKeyboardNotifications];
     self.thread.tableView = self;
+    if(self.thread.count < 1)
+    {
     [self.thread fetchThreadPosts];
+        self.thread.count++;
+    }
     
     self.topicLabel.text = self.thread.thread.topic;
     self.groupRadiusLabel.text = [NSString stringWithFormat:@"Group Radius: %@ meters",self.thread.thread.radius];
@@ -96,13 +106,16 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+   if(textField.text != nil)
+   {
     self.userNewPostContent = textField.text;
      [self createNewpost];
-    [self.tableView reloadData];
+   // [self.tableView reloadData];
   //  [self.viewToHide setHidden:NO];
     
     self.activeTextField.text = nil;
     self.activeTextField = nil;
+   }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

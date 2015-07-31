@@ -23,6 +23,7 @@
 		81374DC91B698D5B007926AD /* circleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DC81B698D5B007926AD /* circleCell.m */; };
 		81374DCC1B698D6D007926AD /* CircularLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 81374DCB1B698D6D007926AD /* CircularLayout.m */; };
 		815B81C41B6A92B5005B658D /* ThreadCreationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 815B81C31B6A92B5005B658D /* ThreadCreationViewController.m */; };
+		8171A1D81B6BFFBA00B66E0D /* RoundedUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8171A1D71B6BFFBA00B66E0D /* RoundedUIView.m */; };
 		81CFCFF91B68126E00FE3B59 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 81CFCFE01B68126E00FE3B59 /* FacebookSDKStrings.bundle */; };
 		81CFCFFA1B68126E00FE3B59 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFE11B68126E00FE3B59 /* FBAudienceNetwork.framework */; };
 		81CFCFFB1B68126E00FE3B59 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81CFCFE21B68126E00FE3B59 /* FBSDKMessengerShareKit.framework */; };
@@ -96,6 +97,8 @@
 		81374DCB1B698D6D007926AD /* CircularLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircularLayout.m; sourceTree = "<group>"; };
 		815B81C21B6A92B5005B658D /* ThreadCreationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThreadCreationViewController.h; sourceTree = "<group>"; };
 		815B81C31B6A92B5005B658D /* ThreadCreationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThreadCreationViewController.m; sourceTree = "<group>"; };
+		8171A1D61B6BFFBA00B66E0D /* RoundedUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedUIView.h; sourceTree = "<group>"; };
+		8171A1D71B6BFFBA00B66E0D /* RoundedUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedUIView.m; sourceTree = "<group>"; };
 		81CFCFE01B68126E00FE3B59 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKStrings.bundle; path = ../../FacebookSDK/FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		81CFCFE11B68126E00FE3B59 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBAudienceNetwork.framework; path = ../../FacebookSDK/FBAudienceNetwork.framework; sourceTree = "<group>"; };
 		81CFCFE21B68126E00FE3B59 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKMessengerShareKit.framework; path = ../../FacebookSDK/FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 				3C3E1C8E1B66D12500D3AF45 /* PostCell.h */,
 				3C3E1C8F1B66D12500D3AF45 /* PostCell.m */,
 				815B81C21B6A92B5005B658D /* ThreadCreationViewController.h */,
+				8171A1D61B6BFFBA00B66E0D /* RoundedUIView.h */,
+				8171A1D71B6BFFBA00B66E0D /* RoundedUIView.m */,
 				815B81C31B6A92B5005B658D /* ThreadCreationViewController.m */,
 				3C3E1C8B1B66D04B00D3AF45 /* ThreadViewController.h */,
 				3C3E1C8C1B66D04B00D3AF45 /* ThreadViewController.m */,
@@ -409,6 +414,7 @@
 				81CFD0161B6814F700FE3B59 /* Collection.m in Sources */,
 				81374DCC1B698D6D007926AD /* CircularLayout.m in Sources */,
 				81CFD0201B687DEB00FE3B59 /* LoginViewController.m in Sources */,
+				8171A1D81B6BFFBA00B66E0D /* RoundedUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

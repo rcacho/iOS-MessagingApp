@@ -46,7 +46,9 @@
 @implementation ThreadCollectionView
 
 
-
+-(void)viewDidAppear:(BOOL)animated{
+    [self.navigationController.navigationBar setHidden:NO];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableViewForRecentLookedAtPosts.backgroundColor = [UIColor colorWithRed:(255.0/255.0) green:(62.0/255.0) blue:(78/255.0) alpha:1.0];

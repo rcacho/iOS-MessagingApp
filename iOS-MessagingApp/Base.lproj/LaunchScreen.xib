@@ -14,7 +14,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                     <color key="backgroundColor" red="0.43921568630000002" green="0.50196078430000002" blue="0.56470588239999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message-plus-icon" translatesAutoresizingMaskIntoConstraints="NO" id="SGg-TH-xxC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="message-plus-icon" translatesAutoresizingMaskIntoConstraints="NO" id="SGg-TH-xxC">
                     <rect key="frame" x="90" y="90" width="300" height="300"/>
                 </imageView>
             </subviews>
